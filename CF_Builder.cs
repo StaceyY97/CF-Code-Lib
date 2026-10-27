@@ -62,79 +62,70 @@ namespace CustomFunctions
     }
     #endregion
 
-    public class DateComp_DSDAT_AESTDAT : CustomFunctionBase
+    public class ValueComp_CMAETERM_AETERM : CustomFunctionBase
     {
         public object Eval(object ThisObject)
         {
             /**************************HEADER INFORMATION******************************
             * Programmer Name: [Your Name]
-            * Description: Compare DSDAT (DS form in EOT folder) against maximum AESTDAT (AE log form).
-            *              Opens query when DSDAT is earlier than the maximum AESTDAT.
-            *              Uses interface types and Basical_Func.cs helper patterns.
+            * Description: Check if CMAETERM matches any AETERM value.
+            *              Opens query when CMAETERM does not match any AETERM.
             **************************************************************************/
 
             IActionFunctionParams afp = (IActionFunctionParams)ThisObject;
-            ISubject subject = Rave.Context.ActionDataPoint.Record.Subject;
+            IDataPoint dpAction = Rave.Context.ActionDataPoint;
 
+            if (dpAction == null) return null;
+            ISubject subject = dpAction.Record.Subject;
             if (subject == null) return null;
 
-            string QT = "End Date prior to the last AE date, please confirm";
-            bool openQuery = false;
+            string fieldOID_compare = "AETERM";
+            string formOID_compare = "AE";
+            string fieldOID_query = "CMAETERM";
+            string formOID_query = "CM";
 
-            // Fetch all AESTDAT values from AE log form (subject-wide scope)
-            IReadOnlyList<IDataPoint> dpsAESTDAT = subject.GetDataPointsByOidPath("AESTDAT", "AE", null);
-            
-            // Get maximum AESTDAT
-            DateTime maxAESTDAT = GetMaxDate(dpsAESTDAT);
+            string queryMessage = "Term's not match with any of the AETERM, please confirm";
+            const bool closeOnChange = true;
+            const bool answerOnChange = true;
+            const int markingGroup = 1;
 
-            // Get DSDAT from DS form in EOT folder (non-log form)
-            IDataPoint dpDSDAT = GetDP("DSDAT", "DS", "EOT", subject);
+            // Fetch all AETERM values from AE log form (subject-wide scope)
+            IReadOnlyList<IDataPoint> dpsAETERM = subject.GetDataPointsByOidPath(fieldOID_compare, formOID_compare, null);
 
-            // Compare dates
-            if (dpDSDAT != null && dpDSDAT.Active && maxAESTDAT != DateTime.MinValue)
+            // Fetch all CMAETERM values from CM log form (subject-wide scope)
+            IReadOnlyList<IDataPoint> dpsCMAETERM = subject.GetDataPointsByOidPath(fieldOID_query, formOID_query, null);
+
+            // If action field is CMAETERM, only check that one; otherwise check all
+            IReadOnlyList<IDataPoint> dpsToCheck = dpAction.Field.OID == fieldOID_query 
+                ? new List<IDataPoint>() { dpAction } 
+                : dpsCMAETERM;
+
+            foreach (IDataPoint dpQuery in dpsToCheck)
             {
-                if (dpDSDAT.StandardValue is DateTime && !dpDSDAT.Data.Contains("UN"))
+                if (dpQuery == null || !dpQuery.Active) continue;
+
+                bool openQuery = false;
+
+                if (dpQuery.Data != string.Empty)
                 {
-                    DateTime dsdatValue = Convert.ToDateTime(dpDSDAT.StandardValue);
-                    if (dsdatValue < maxAESTDAT)
+                    // Check if this CMAETERM value matches any AETERM value
+                    bool foundMatch = false;
+                    foreach (IDataPoint dpCompare in dpsAETERM)
                     {
-                        openQuery = true;
+                        if (dpCompare == null || !dpCompare.Active) continue;
+                        if (dpCompare.Data != string.Empty && string.Equals(dpCompare.Data.Trim(), dpQuery.Data.Trim(), StringComparison.OrdinalIgnoreCase))
+                        {
+                            foundMatch = true;
+                            break;
+                        }
                     }
+                    if (!foundMatch) openQuery = true;
                 }
-            }
 
-            // Open or close query on DSDAT
-            if (dpDSDAT != null)
-            {
-                Rave.Marking.PerformQueryAction(dpDSDAT, QT, 1, false, false, openQuery, afp.CheckRef, afp.CheckHash);
+                Rave.Marking.PerformQueryAction(dpQuery, queryMessage, markingGroup, answerOnChange, closeOnChange, openQuery, afp.CheckRef, afp.CheckHash);
             }
 
             return null;
         }
-
-        IDataPoint GetDP(string field_Oid, string form_Oid, string folder_Oid, ISubject subj) 
-            => subj.Instances.FindByFolderOid(folder_Oid)?.DataPages.FindByFormOid(form_Oid)?.MasterRecord.AllDataPoints.FindByFieldOid(field_Oid);
-
-
-        DateTime GetMaxDate(IReadOnlyList<IDataPoint> dps)
-        {
-            DateTime maxDate = DateTime.MinValue;
-            if (dps == null || dps.Count == 0) return maxDate;
-
-            for (int i = 0; i < dps.Count; i++)
-            {
-                if (dps[i] == null || !dps[i].Active) continue;
-                if (!(dps[i].StandardValue is DateTime)) continue;
-                if (dps[i].Data.Contains("UN")) continue;
-
-                DateTime currentDate = Convert.ToDateTime(dps[i].StandardValue);
-                if (maxDate == DateTime.MinValue || currentDate > maxDate)
-                {
-                    maxDate = currentDate;
-                }
-            }
-            return maxDate;
-        }
-
     }
 }

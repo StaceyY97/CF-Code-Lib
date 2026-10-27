@@ -13,6 +13,7 @@ validate it, and return complete usable code.
 
 1. **Always write generated CF code directly into CF_Builder.cs file** for user review.
 2. **CF_Builder.cs editable region**:
+   - **When writing a new CF, DELETE all existing CFs in CF_Builder.cs and replace with the new CF**
    - Only edit content **after** `public object Eval(object ThisObject)` `{` and **before** the matching closing braces `}` `}` `}` at the end of the class
    - **DO NOT modify** the standard framework: using statements, `_SystemClass` region, class declaration, or the final closing braces
    - Lambda expressions and helper methods should be placed either:
