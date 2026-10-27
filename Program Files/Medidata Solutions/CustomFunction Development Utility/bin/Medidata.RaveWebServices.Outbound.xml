@@ -1,0 +1,381 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Medidata.RaveWebServices.Outbound</name>
+    </assembly>
+    <members>
+        <member name="T:Medidata.RaveWebServices.Outbound.Connector">
+            <summary>
+            Manages the creation of HTTP request instances.
+            </summary>
+            <remarks>
+            This class implements the <see cref="T:Medidata.RaveWebServices.Outbound.IConnector"/> interface. In general usage you should
+            work through that interface rather than with this class directly, e.g. assign instances of
+            this class to an <see cref="T:Medidata.RaveWebServices.Outbound.IConnector"/> variable.
+            </remarks>
+        </member>
+        <member name="M:Medidata.RaveWebServices.Outbound.Connector.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Medidata.RaveWebServices.Outbound.Connector"/> class.
+            </summary>
+        </member>
+        <member name="M:Medidata.RaveWebServices.Outbound.Connector.#cctor">
+            <summary>
+            Static Constructor.
+            </summary>
+        </member>
+        <member name="M:Medidata.RaveWebServices.Outbound.Connector.CreateHttpGetRequest(System.String)">
+            <summary>
+            Initializes a new HTTP request instance that will perform an HTTP GET method.
+            </summary>
+            <param name="url">The HTTP URL that the request will be made against.</param>
+            <returns><c>HttpRequest</c> instance.</returns>
+        </member>
+        <member name="M:Medidata.RaveWebServices.Outbound.Connector.CreateHttpPostRequest(System.String)">
+            <summary>
+            Initialises a new HTTP request instance that will perform an HTTP POST method.
+            </summary>
+            <param name="url">The HTTP URL that the request will be made against.</param>
+            <returns><c>HttpRequestWithBody</c> instance.</returns>
+        </member>
+        <member name="M:Medidata.RaveWebServices.Outbound.Connector.CreateJsonHttpPostRequest(System.String)">
+            <summary>
+            See <see cref="M:Medidata.RaveWebServices.Outbound.IConnector.CreateHttpPostRequest(System.String)"/> for details.
+            </summary>
+        </member>
+        <member name="M:Medidata.RaveWebServices.Outbound.Connector.CreateHttpDeleteRequest(System.String)">
+            <summary>
+            Initialises a new HTTP request instance that will perform an HTTP DELETE method.
+            </summary>
+            <param name="url">The HTTP URL that the request will be made against.</param>
+            <returns><c>HttpRequestWithBody</c> instance.</returns>
+        </member>
+        <member name="P:Medidata.RaveWebServices.Outbound.Connector.ShareCookiesBetweenRequests">
+            <summary>
+            See <see cref="P:Medidata.RaveWebServices.Outbound.IConnector.ShareCookiesBetweenRequests"/> for details.
+            </summary>
+        </member>
+        <member name="M:Medidata.RaveWebServices.Outbound.Connector.NewWebProxy">
+            <summary>
+            Returns the new instance of the WebProxy.
+            </summary>
+            <returns>New instance of the WebProxy; otherwise <c>null</c>.</returns>
+        </member>
+        <member name="M:Medidata.RaveWebServices.Outbound.Connector.GetProxySetting">
+            <summary>
+            Returns the proxy URL.
+            </summary>
+            <returns><c>string</c>; otherwise, <c>null</c>.</returns>
+        </member>
+        <member name="T:Medidata.RaveWebServices.Outbound.HttpRequest">
+            <summary>
+            Abstract implementation of the <see cref="T:Medidata.RaveWebServices.Outbound.IHttpRequest"/> interface with behaviour common
+            to all HTTP methods. Do not create instances of this class directly, use the factory
+            methods in the <see cref="T:Medidata.RaveWebServices.Outbound.Connector"/> class instead.
+            </summary>
+            <remarks>
+            This class is public for unit testing purposes only. Use with extreme caution as the
+            implementation is not guaranteed to stay compatible between versions.
+            </remarks>
+        </member>
+        <member name="T:Medidata.RaveWebServices.Outbound.HttpRequestException">
+            <summary>
+            Represents the exception that is thrown when an error occurs while sending a request. This includes
+            time-out expirations and HTTP protocol-level errors, i.e. when 400 and 500 series response
+            codes are returned in the response.
+            </summary>
+        </member>
+        <member name="M:Medidata.RaveWebServices.Outbound.HttpRequestException.#ctor(Medidata.RaveWebServices.Outbound.IHttpResponse,System.Net.WebExceptionStatus)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Medidata.RaveWebServices.Outbound.HttpRequestException"/> class.
+            </summary>
+        </member>
+        <member name="M:Medidata.RaveWebServices.Outbound.HttpRequestException.#ctor(Medidata.RaveWebServices.Outbound.IHttpResponse,System.Net.WebExceptionStatus,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Medidata.RaveWebServices.Outbound.HttpRequestException"/> class with an
+            inner exception.
+            </summary>
+        </member>
+        <member name="M:Medidata.RaveWebServices.Outbound.HttpRequestException.Initialize(Medidata.RaveWebServices.Outbound.IHttpResponse,System.Net.WebExceptionStatus)">
+            <summary>
+            Initializes the specified response.
+            </summary>
+            <param name="response">The response.</param>
+            <param name="status">The status.</param>
+        </member>
+        <member name="P:Medidata.RaveWebServices.Outbound.HttpRequestException.Response">
+            <summary>
+            Gets the response.
+            </summary>
+            <remarks>
+            This will be null unless the exception was thrown due to a protocol-level error.
+            </remarks>
+            <value>
+            <c>Response</c>; otherwise, <c>null</c>.
+            </value>
+        </member>
+        <member name="P:Medidata.RaveWebServices.Outbound.HttpRequestException.Status">
+            <summary>
+            Gets the status of the request.
+            </summary>
+            <remarks>
+            This can be used to determine whether the exception was thrown due to a time-out expiring, a protocol-level error or some other reason.
+            </remarks>
+        </member>
+        <member name="T:Medidata.RaveWebServices.Outbound.HttpRequestWithBody">
+            <summary>
+            Implementation of the <see cref="T:Medidata.RaveWebServices.Outbound.IHttpRequestWithBody"/> interface for the HTTP POST
+            method. Do not create instances of this class directly, use
+            <see cref="M:Medidata.RaveWebServices.Outbound.Connector.CreateHttpPostRequest(System.String)"/> instead.
+            </summary>
+            <remarks>
+            This class is public for unit testing purposes only. Use with extreme caution as the
+            implementation is not guaranteed to stay compatible between versions.
+            </remarks>
+        </member>
+        <member name="M:Medidata.RaveWebServices.Outbound.HttpRequestWithBody.#ctor(System.Net.HttpWebRequest,Medidata.RaveWebServices.Outbound.HttpResponse,log4net.ILog)">
+            <summary>
+            Initialises a new instance of the <see cref="T:Medidata.RaveWebServices.Outbound.HttpRequestWithBody"/> class. Do not create
+            instances of this class directly, use <see cref="M:Medidata.RaveWebServices.Outbound.Connector.CreateHttpPostRequest(System.String)"/>
+            instead.
+            </summary>
+            <remarks>
+            This method is public for unit testing purposes only. Use with extreme caution as the
+            implementation is not guaranteed to stay compatible between versions.
+            </remarks>
+        </member>
+        <member name="M:Medidata.RaveWebServices.Outbound.HttpRequestWithBody.AppendToBody(System.String)">
+            <summary>
+            Appends a string to the body of the response, encoded as UTF-8.
+            </summary>
+            <param name="content">The string to be appended to the body of the response.</param>
+        </member>
+        <member name="T:Medidata.RaveWebServices.Outbound.HttpRequestWithoutBody">
+            <summary>
+            Implementation of the <see cref="T:Medidata.RaveWebServices.Outbound.IHttpRequest"/> interface for the HTTP GET method. Do not
+            create instances of this class directly, use <see cref="M:Medidata.RaveWebServices.Outbound.Connector.CreateHttpGetRequest(System.String)"/>
+            instead.
+            </summary>
+            <remarks>
+            This class is public for unit testing purposes only. Use with extreme caution as the
+            implementation is not guaranteed to stay compatible between versions.
+            </remarks>
+        </member>
+        <member name="M:Medidata.RaveWebServices.Outbound.HttpRequestWithoutBody.#ctor(System.Net.HttpWebRequest,Medidata.RaveWebServices.Outbound.HttpResponse,log4net.ILog)">
+            <summary>
+            Initialises a new instance of the <see cref="T:Medidata.RaveWebServices.Outbound.HttpRequestWithoutBody"/> class. Do not create
+            instances of this class directly, use <see cref="M:Medidata.RaveWebServices.Outbound.Connector.CreateHttpGetRequest(System.String)"/>
+            instead.
+            </summary>
+            <remarks>
+            This method is public for unit testing purposes only. Use with extreme caution as the
+            implementation is not guaranteed to stay compatible between versions.
+            </remarks>
+        </member>
+        <member name="T:Medidata.RaveWebServices.Outbound.HttpResponse">
+            <summary>
+            Implementation of the <see cref="T:Medidata.RaveWebServices.Outbound.IHttpResponse"/> interface. Do not create instances of
+            this class directly, use the factory methods in the <see cref="T:Medidata.RaveWebServices.Outbound.Connector"/> class followed
+            by <see cref="M:Medidata.RaveWebServices.Outbound.IHttpRequest.GetResponse"/> instead.
+            </summary>
+            <remarks>
+            This class is public for unit testing purposes only. Use with extreme caution as the
+            implementation is not guaranteed to stay compatible between versions.
+            </remarks>
+        </member>
+        <member name="M:Medidata.RaveWebServices.Outbound.HttpResponse.#ctor(System.Net.HttpWebRequest,log4net.ILog)">
+            <summary>
+            Initialises a new instance of the <see cref="T:Medidata.RaveWebServices.Outbound.HttpResponse"/> class. Do not create
+            instances of this class directly, use the factory methods in <see cref="T:Medidata.RaveWebServices.Outbound.Connector"/>
+            followed by <see cref="M:Medidata.RaveWebServices.Outbound.IHttpRequest.GetResponse"/> instead.
+            </summary>
+            <remarks>
+            This method is public for unit testing purposes only. Use with extreme caution as the
+            implementation is not guaranteed to stay compatible between versions.
+            </remarks>
+        </member>
+        <member name="P:Medidata.RaveWebServices.Outbound.HttpResponse.Code">
+            <summary>
+            Gets the response code returned by the response to the originating request.
+            </summary>
+        </member>
+        <member name="T:Medidata.RaveWebServices.Outbound.IConnector">
+            <summary>
+            Provides methods for creating HTTP request instances.
+            </summary>
+        </member>
+        <member name="M:Medidata.RaveWebServices.Outbound.IConnector.CreateHttpGetRequest(System.String)">
+            <summary>
+            Initializes a new HTTP request instance that will perform an HTTP GET method.
+            </summary>
+            <param name="url">The HTTP URL that the request will be made against.</param>
+            <returns>An HTTP request instance implementing the IHttpRequest interface.</returns>
+        </member>
+        <member name="M:Medidata.RaveWebServices.Outbound.IConnector.CreateHttpPostRequest(System.String)">
+            <summary>
+            Initializes a new HTTP request instance that will perform an HTTP POST method.
+            </summary>
+            <param name="url">The HTTP URL that the request will be made against.</param>
+            <returns>An HTTP request instance implementing the IHttpRequestWithBody
+            interface.</returns>
+        </member>
+        <member name="M:Medidata.RaveWebServices.Outbound.IConnector.CreateJsonHttpPostRequest(System.String)">
+            <summary>
+            Initializes a new HTTP request instance that will perform an HTTP POST method.
+            </summary>
+            <param name="url">The HTTP URL that the request will be made against.</param>
+            <returns>An HTTP request instance implementing the IHttpRequestWithBody
+            interface.</returns>
+        </member>
+        <member name="M:Medidata.RaveWebServices.Outbound.IConnector.CreateHttpDeleteRequest(System.String)">
+            <summary>
+            Initializes a new HTTP request instance that will perform an HTTP DELETE method.
+            </summary>
+            <param name="url">The HTTP URL that the request will be made against.</param>
+            <returns>An HTTP request instance implementing the IHttpRequestWithBody
+            interface.</returns>
+        </member>
+        <member name="P:Medidata.RaveWebServices.Outbound.IConnector.ShareCookiesBetweenRequests">
+            <summary>
+            If set true, cookies will be shared between each request created by this instance.
+            Defaults to false.
+            </summary>
+        </member>
+        <member name="T:Medidata.RaveWebServices.Outbound.IHttpRequest">
+            <summary>
+            Provides methods for sending an HTTP request to a URL.
+            </summary>
+        </member>
+        <member name="P:Medidata.RaveWebServices.Outbound.IHttpRequest.Url">
+            <summary>
+            Gets the URL that will be used to perform this request.
+            </summary>
+        </member>
+        <member name="P:Medidata.RaveWebServices.Outbound.IHttpRequest.Timeout">
+            <summary>
+            Sets the time in milliseconds that the request will wait for a response before
+            throwing an HttpRequestException with a Status of Timeout.
+            </summary>
+        </member>
+        <member name="M:Medidata.RaveWebServices.Outbound.IHttpRequest.GetResponse">
+            <summary>
+            Sends the request and returns the corresponding HTTP response instance.
+            </summary>
+            <returns>An HTTP response instance implementing the IHttpResponse interface.</returns>
+            <exception cref="!:Medidata.WebServices.HttpRequestException">
+            An error occurred while sending the request or the time-out expired or a protocol-level
+            error occurred, i.e. a 400 or 500 series response code was returned in the response.
+            </exception>
+        </member>
+        <member name="M:Medidata.RaveWebServices.Outbound.IHttpRequest.AddHeader(System.String,System.String)">
+            <summary>
+            Adds the named header to the request with the given value.
+            </summary>
+            <param name="name">The name of the header.</param>
+            <param name="value">The value of the header.</param>
+            <exception cref="T:System.ArgumentException">
+            The named header may not be added directly because it is managed internally by the
+            class.
+            </exception>
+            <remarks>
+            Headers including "Content-Length", "Host" and "Proxy-Authentication" are managed
+            internally by the class and may not be added with this method. Based on the
+            implementation, addition of headers such as "Range" may also not be allowed.
+            </remarks>
+        </member>
+        <member name="M:Medidata.RaveWebServices.Outbound.IHttpRequest.SetBasicAuthenticationCredentials(System.String,System.String)">
+            <summary>
+            Sets the username and password that will be sent with request using the HTTP Basic
+            authentication scheme.
+            </summary>
+            <param name="username">The username.</param>
+            <param name="password">The plaintext password.</param>
+            <remarks>
+            This method should only be used when the request will be sent over HTTPS as the
+            plaintext password is readily accessible in the request headers.
+            </remarks>
+        </member>
+        <member name="M:Medidata.RaveWebServices.Outbound.IHttpRequest.AuthenticateOnRedirectionTo(System.String)">
+            <summary>
+            Ensures that if the initial request is redirected to another URL, the HTTP Basic
+            authentication credentials are sent to this URL as well.
+            </summary>
+            <param name="url">The URL to which HTTP Basic authentication credentials will be
+            sent.</param>
+            <exception cref="T:System.InvalidOperationException">
+            The method was called before <see cref="M:Medidata.RaveWebServices.Outbound.IHttpRequest.SetBasicAuthenticationCredentials(System.String,System.String)"/> was called.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            The given URL was null.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            The given URL was not valid.
+            </exception>
+            <remarks>
+            If just the domain part is given in the URL is given, any redirected URL in this domain
+            will receive the credentials. This method cannot be called until after
+            <see cref="M:Medidata.RaveWebServices.Outbound.IHttpRequest.SetBasicAuthenticationCredentials(System.String,System.String)"/> has been called. It can be called
+            multiple times if multiple redirections occur, each requiring credentials.
+            </remarks>
+        </member>
+        <member name="T:Medidata.RaveWebServices.Outbound.IHttpRequestWithBody">
+            <summary>
+            Provides methods for sending an HTTP request to a URL. Extends the IHttpRequest interface
+            to provide methods for creating the body of the request.
+            </summary>
+        </member>
+        <member name="P:Medidata.RaveWebServices.Outbound.IHttpRequestWithBody.Stream">
+            <summary>
+            Gets the stream that can be used for writing to the body of the response.
+            </summary>
+        </member>
+        <member name="M:Medidata.RaveWebServices.Outbound.IHttpRequestWithBody.AppendToBody(System.String)">
+            <summary>
+            Appends a string to the body of the response, encoded as UTF-8.
+            </summary>
+            <param name="content">The string to be appended to the body of the response.</param>
+        </member>
+        <member name="M:Medidata.RaveWebServices.Outbound.IHttpRequestWithBody.AppendToBody(System.String,System.Text.Encoding)">
+            <summary>
+            Appends a string to the body of the response, encoded with the given encoding.
+            </summary>
+            <param name="content">The string to be appended to the body of the response.</param>
+            <param name="encoding">The encoding used to write the content to the body of the response.</param>
+        </member>
+        <member name="T:Medidata.RaveWebServices.Outbound.IHttpResponse">
+            <summary>
+            Provides methods for accessing the response code, headers and body of an HTTP response.
+            </summary>
+        </member>
+        <member name="P:Medidata.RaveWebServices.Outbound.IHttpResponse.Code">
+            <summary>
+            Gets the response code returned by the response to the originating request.
+            </summary>
+        </member>
+        <member name="P:Medidata.RaveWebServices.Outbound.IHttpResponse.Stream">
+            <summary>
+            Gets the stream that can be used to read the body of the response.
+            </summary>
+        </member>
+        <member name="M:Medidata.RaveWebServices.Outbound.IHttpResponse.ReadBody">
+            <summary>
+            Gets the body of the response, decoded as UTF-8.
+            </summary>
+            <returns>A string containing the body of the response.</returns>
+        </member>
+        <member name="M:Medidata.RaveWebServices.Outbound.IHttpResponse.ReadBody(System.Text.Encoding)">
+            <summary>
+            Gets the body of the response, decoded with the given encoding.
+            </summary>
+            <param name="endcoding">The encoding used to read the body of the response.</param>
+            <returns>A string containing the body of the response.</returns>
+        </member>
+        <member name="M:Medidata.RaveWebServices.Outbound.IHttpResponse.GetHeader(System.String)">
+            <summary>
+            Gets the value of the named header from the response.
+            </summary>
+            <param name="name">The name of the header.</param>
+            <returns>A string containing the value of the header.</returns>
+        </member>
+    </members>
+</doc>

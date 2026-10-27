@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Medidata.Rave.EDC.Redirector</name>
+    </assembly>
+    <members>
+        <member name="P:Medidata.Rave.EDC.Redirector.Data.ProjectInfoDto.IsClassic">
+            <summary>
+            True if is Classic.
+            False if is not Classic.
+            Null if unknown.
+            </summary>
+        </member>
+        <member name="T:Medidata.Rave.EDC.Redirector.Providers.EDCUrlInfoProviderNotImplemented">
+            <summary>
+            There should be no reason to need to construct an EDC url in this class from inside EDC.API.
+            That is why those methods are not implemented.
+            </summary>
+        </member>
+    </members>
+</doc>

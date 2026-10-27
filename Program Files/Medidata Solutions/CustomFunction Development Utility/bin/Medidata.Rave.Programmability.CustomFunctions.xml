@@ -1,0 +1,316 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Medidata.Rave.Programmability.CustomFunctions</name>
+    </assembly>
+    <members>
+        <member name="T:Medidata.Cloud.Programmability.CustomFunctions.Roslyn.CustomFunctionCompilationResult">
+            <summary>
+            The result of a custom function compilation.
+            </summary>
+        </member>
+        <member name="M:Medidata.Cloud.Programmability.CustomFunctions.Roslyn.CustomFunctionCompilationResult.#ctor(System.Type,System.Collections.Generic.IReadOnlyCollection{Medidata.Cloud.Programmability.CustomFunctions.Data.CustomFunctionDiagnosticInfo},Microsoft.CodeAnalysis.Compilation,System.String)">
+            <summary>
+            The result of a custom function compilation.
+            </summary>
+        </member>
+        <member name="M:Medidata.Cloud.Programmability.CustomFunctions.Roslyn.RoslynCustomFunctionAnalyzer.SortDiagnostics(System.Collections.Generic.IEnumerable{Microsoft.CodeAnalysis.Diagnostic})">
+            <summary>
+            Sort diagnostics by location in source document.
+            </summary>
+            <param name="diagnostics">The list of Diagnostics to be sorted.</param>
+            <returns>An IEnumerable containing the Diagnostics in order of Location.</returns>
+        </member>
+        <member name="M:Medidata.Cloud.Programmability.CustomFunctions.Roslyn.RoslynCustomFunctionCompiler.RespondToCompilation(Microsoft.CodeAnalysis.Compilation,System.String,System.Boolean)">
+            <summary>
+            If we compiled successfully, return the instance. If not, return the errors.
+            </summary>
+            <param name="compilation">The compiled code of the custom function.</param>
+            <param name="customFunctionName">The custom function name.</param>
+            <returns>The result of the compilation.</returns>
+        </member>
+        <member name="M:Medidata.Cloud.Programmability.CustomFunctions.Roslyn.RoslynExtensions.GetOffsetDiagnosticMessage(Medidata.Cloud.Programmability.CustomFunctions.Data.CustomFunctionDiagnosticInfo)">
+            <summary>
+            There is namespace and open declaration that isn't shown on the screen.
+            This method offsets the error displayed to the user to make it more understandable to which object the compiler refers.
+            </summary>
+            <returns>The error message from the diagnostic, but with the line numbers offset by the amount of the preamble.</returns>
+        </member>
+        <member name="T:Medidata.Cloud.Programmability.CustomFunctions.Adapters.IProtocolDeviationAdapter">
+            <summary>
+            Access information about protocol deviations pertaining to custom functions.
+            </summary>
+        </member>
+        <member name="M:Medidata.Cloud.Programmability.CustomFunctions.Adapters.IProtocolDeviationAdapter.GetInactiveCodeIds">
+            <summary>
+            Get all inactive protocol deviation codes.
+            </summary>
+            <returns>All inactive protocol deviation codes.</returns>
+        </member>
+        <member name="M:Medidata.Cloud.Programmability.CustomFunctions.Adapters.IProtocolDeviationAdapter.GetInactiveClassIds">
+            <summary>
+            Get all inactive protocol deviation classes.
+            </summary>
+            <returns>All inactive protocol deviation classes.</returns>
+        </member>
+        <member name="M:Medidata.Cloud.Programmability.CustomFunctions.Analyzers.MemberAccessExpressionCustomFunctionAnalyzer.GetSymbolInfo(Microsoft.CodeAnalysis.SemanticModel,Microsoft.CodeAnalysis.SyntaxNode)">
+            <summary>
+            A symbol should be retrieved. If it is not, this is likely
+            because the code has some sort of compilation issue.
+            This should be prevented by the precompilation and should never be hit in normal code.
+            Which is why the next method throws an exception for the null symbol return.
+            </summary>
+        </member>
+        <member name="M:Medidata.Cloud.Programmability.CustomFunctions.Analyzers.MemberAccessExpressionCustomFunctionAnalyzer.RecurseToBaseTypeToFindMethod(Microsoft.CodeAnalysis.IPropertySymbol,System.Func{Microsoft.CodeAnalysis.IPropertySymbol,Microsoft.CodeAnalysis.IMethodSymbol})">
+            <summary>
+            This is for the case that the child object doesn't contain a getter/setter, but the parent does.
+            For example, the XmlAttribute InnerText property which doesn't have a "get" but its parent XmlNode does.
+            </summary>
+            <param name="symbol">The symbol to look for the GetMethod on.</param>
+            <returns>The symbol which contains the GetMethod.</returns>
+        </member>
+        <member name="M:Medidata.Cloud.Programmability.CustomFunctions.Analyzers.ProtocolDeviationCustomFunctionAnalyzer.TryToConvertToInteger(Microsoft.CodeAnalysis.CSharp.Syntax.ArgumentSyntax)">
+             <summary>
+             Only valid cases we are looking for are either
+             One literal:
+             AddProtocolDeviation("thing", 1, 2)
+             Or one identifier:
+             int someCode = 12;
+             AddProtocolDeviation("thing", someCode, 2)
+            
+             We will report a possible issue if we see some argument type we can't figure out.
+             Some examples are:
+             AddProtocolDeviation("thing", 1 + 2, 2)
+             int someCode = 12 + 13;
+             AddProtocolDeviation("thing", someCode, 2).
+             </summary>
+             <returns>The integer value of the paramter if we can figure it out, null otherwise.</returns>
+        </member>
+        <member name="T:Medidata.Cloud.Programmability.CustomFunctions.Attributes.CustomerAPIAttribute">
+            <summary>
+            Attribute to let us know which members and local declarations are used by clients in CustomFunctions.
+            </summary>
+        </member>
+        <member name="M:Medidata.Cloud.Programmability.CustomFunctions.Compilation.CustomFunctionEngine.Validate(System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Validate a custom function. Determine if it is able to be compiled, and, if not, why not?.
+            </summary>
+            <param name="name">The name of the custom function.</param>
+            <param name="code">The source code of the custom function.</param>
+            <param name="customerApiCompatibilityVersion">The customerApiCompatibilityVersion of the project related to custom function.</param>
+        </member>
+        <member name="M:Medidata.Cloud.Programmability.CustomFunctions.Compilation.CustomFunctionEngine.TryEvaluatePrecompiled(Medidata.Cloud.Programmability.CustomFunctions.Compilation.CompilableCustomFunction,Medidata.Cloud.Programmability.CustomFunctions.Compilation.CustomFunctionValidationResult@)">
+            <summary>
+            Check to see if a precompiled custom function will handle the code.
+            </summary>
+            <param name="function">The compilable custom function.</param>
+            <param name="customFunctionPrecompilationResult">The result of a precompiled custom function being found.</param>
+            <returns>Returns true if a precompiled custom function was found.</returns>
+        </member>
+        <member name="M:Medidata.Cloud.Programmability.CustomFunctions.Compilation.CustomFunctionEngine.TryGetDatabaseSwap(Medidata.Cloud.Programmability.CustomFunctions.Compilation.CompilableCustomFunction,System.Byte[],System.String@)">
+            <summary>
+            Database swaps exist to allow us to CMP clients who have bad functionality in the C# swappers.
+            Developers should NOT be using this to change client custom functions unless in case of emergency.
+            Instead create a C# implementation as a precompiled custom function or a swapper.
+            </summary>
+            <param name="function">The compilable custom function.</param>
+            <param name="sourceCodeHash">The SHA52 hash of the source code of the compilable custom function.</param>
+            <param name="dbSwappedCustomFunctionCode">If there is code to swap in the database, this is set to the new code.</param>
+            <returns>True if a database swap was found.</returns>
+        </member>
+        <member name="M:Medidata.Cloud.Programmability.CustomFunctions.Compilation.CustomFunctionEngine.TryGetCustomFunctionSwap(Medidata.Cloud.Programmability.CustomFunctions.Compilation.CompilableCustomFunction,System.Byte[],Medidata.Cloud.Programmability.CustomFunctions.Compilation.CustomFunctionValidationResult@)">
+            <summary>
+            Use the swapper functionality to replace a custom function with a new implementation.
+            </summary>
+            <param name="function">The compilable custom function.</param>
+            <param name="sourceCodeHash">The hash of the original source code.</param>
+            <param name="customFunctionSwapResult">The result of a swapped custom function being found.</param>
+            <returns>Returns true if a swapped custom function was found.</returns>
+        </member>
+        <member name="M:Medidata.Cloud.Programmability.CustomFunctions.Compilation.CustomFunctionEngine.ValidateCustomFunction(Medidata.Cloud.Programmability.CustomFunctions.Compilation.CompilableCustomFunction)">
+            <summary>
+            Validate a custom function. Determine if it is able to be compiled, and, if not, why not?.
+            </summary>
+            <param name="function">The function object if it is already loaded.</param>
+        </member>
+        <member name="T:Medidata.Cloud.Programmability.CustomFunctions.Customizations.CustomizationAgent">
+            <summary>
+            Represents a customization agent.
+            </summary>
+        </member>
+        <member name="M:Medidata.Cloud.Programmability.CustomFunctions.Customizations.CustomizationAgent.ExecuteDataSetNoValidation(System.String)">
+            <summary>
+            Executes a stored procedure against the database and returns a <see cref="T:System.Data.DataSet" />.
+            </summary>
+            <param name="sql">sql.</param>
+            <returns>DataSet instance with specified input.</returns>
+        </member>
+        <member name="M:Medidata.Cloud.Programmability.CustomFunctions.Customizations.CustomizationAgent.ExecuteDataSetNoValidation(System.String,System.Object[])">
+            <summary>
+            Executes a stored procedure against the database and returns a <see cref="T:System.Data.DataSet" />.
+            </summary>
+            <param name="procedureName">Name of stored procedure to execute.</param>
+            <param name="parameters"><see cref="T:System.Array" /> list of parameters.</param>
+            <returns><see cref="T:System.Data.DataSet" /> DataSet instance with specified parameters.</returns>
+        </member>
+        <member name="M:Medidata.Cloud.Programmability.CustomFunctions.Customizations.CustomizationAgent.ExecuteNonQueryNoValidation(System.String)">
+            <summary>
+            Executes a direct-sql command against the database and returns the number of rows affected.
+            </summary>
+            <param name="sql">sql.</param>
+            <returns>Number of rows affected.</returns>
+        </member>
+        <member name="M:Medidata.Cloud.Programmability.CustomFunctions.Customizations.CustomizationAgent.ExecuteNonQueryNoValidation(System.String,System.Object[])">
+            <summary>
+            Executes a direct-sql command against the database and returns the number of rows affected.
+            </summary>
+            <param name="procedureName">Name of stored procedure to execute.</param>
+            <param name="parameters"><see cref="T:System.Array" /> list of parameters.</param>
+            <returns>Number of rows affected.</returns>
+        </member>
+        <member name="M:Medidata.Cloud.Programmability.CustomFunctions.Customizations.CustomizationAgent.ExecuteScalarNoValidation(System.String)">
+            <summary>
+            Executes a stored procedure against the database and returns a scalar object.
+            </summary>
+            <param name="sql">sql.</param>
+            <returns>Scalar result.</returns>
+        </member>
+        <member name="M:Medidata.Cloud.Programmability.CustomFunctions.Customizations.CustomizationAgent.ExecuteScalarNoValidation(System.String,System.Object[])">
+            <summary>
+            Executes a stored procedure against the database and returns a scalar object.
+            </summary>
+            <param name="procedureName">Name of stored procedure to execute.</param>
+            <param name="parameters"><see cref="T:System.Array" /> list of parameters.</param>
+            <returns>Scalar result.</returns>
+        </member>
+        <member name="M:Medidata.Cloud.Programmability.CustomFunctions.Customizations.CustomizationAgent.ExecuteDataSet(System.String,System.Object[])">
+            <summary>
+            Executes a stored procedure against the database and returns a <see cref="T:System.Data.DataSet" />.
+            </summary>
+            <param name="procedureName">Name of stored procedure to execute.</param>
+            <param name="parameters"><see cref="T:System.Array" /> list of parameters.</param>
+            <returns><see cref="T:System.Data.DataSet" />.</returns>
+        </member>
+        <member name="M:Medidata.Cloud.Programmability.CustomFunctions.Customizations.CustomizationAgent.ExecuteNonQuery(System.String,System.Object[])">
+            <summary>
+            Executes a direct sql command against the database and return the number of rows affected.
+            </summary>
+            <param name="procedureName">Name of stored procedure to execute.</param>
+            <param name="parameters"><see cref="T:System.Array" /> list of parameterss.</param>
+            <returns>Number of rows affected.</returns>
+        </member>
+        <member name="M:Medidata.Cloud.Programmability.CustomFunctions.Customizations.CustomizationAgent.ExecuteScalar(System.String,System.Object[])">
+            <summary>
+            Executes a stored procedure against the database and returns a scalar object.
+            </summary>
+            <param name="procedureName">Name of stored procedure to execute.</param>
+            <param name="parameters"><see cref="T:System.Array" /> list of parameters.</param>
+            <returns>Scalar result.</returns>
+        </member>
+        <member name="T:Medidata.Cloud.Programmability.CustomFunctions.Enums.CompilableCustomFunctionLanguage">
+            <summary>
+            The languages supported by the custom functions.
+            </summary>
+        </member>
+        <member name="F:Medidata.Cloud.Programmability.CustomFunctions.Enums.CompilableCustomFunctionLanguage.CSharp">
+            <summary>
+            C#.
+            </summary>
+        </member>
+        <member name="F:Medidata.Cloud.Programmability.CustomFunctions.Enums.CompilableCustomFunctionLanguage.VisualBasic">
+            <summary>
+            Visual Basic.
+            </summary>
+        </member>
+        <member name="M:Medidata.Cloud.Programmability.CustomFunctions.Runtime.CustomFunctionRuntime.Eval(System.Object,System.Type)">
+            <summary>
+            Evaluate the custom function that has been compiled and turned into a type to call.
+            </summary>
+            <param name="actionFunctionParams">The ActionFunctionParams to pass into the Eval method in the custom function.</param>
+            <param name="customFunctionType">The custom function code to instantiate and call evaluate on.</param>
+            <returns>The result of the evaluated function.</returns>
+        </member>
+        <member name="M:Medidata.Cloud.Programmability.CustomFunctions.Runtime.ICustomFunctionRuntime.Eval(System.Object,System.Type)">
+            <summary>
+            Evaluate the custom function that has been compiled and turned into a type to call.
+            </summary>
+            <param name="actionFunctionParams">The ActionFunctionParams to pass into the Eval method in the custom function.</param>
+            <param name="customFunctionType">The custom function code to instantiate and call evaluate on.</param>
+            <returns>The result of the evaluated function.</returns>
+        </member>
+        <member name="T:Medidata.Cloud.Programmability.CustomFunctions.Support.CustomFunction">
+            <summary>
+            ReSharper disable InconsistentNaming // compatibility with CFs.
+            This class is used as the base class when compiling CFs in
+            Programmability.CustomFunctions.CustomFunctionCompiler.
+            When running the compiled CF, this DLL then gets referenced and
+            is then the only dependency of the CF, rather than the whole
+            Programmability namespace.
+            </summary>
+        </member>
+        <member name="M:Medidata.Cloud.Programmability.CustomFunctions.Support.CustomFunction.Eval(System.Object)">
+            <summary>
+            Evaluate the Object.
+            </summary>
+            <param name="ThisObject">This Object.</param>
+            <returns>Object.</returns>
+        </member>
+        <member name="M:Medidata.Cloud.Programmability.CustomFunctions.Whitelist.DotNetListBase.D(System.Collections.Generic.KeyValuePair{System.String,System.Collections.Generic.IReadOnlyDictionary{System.String,System.Collections.Generic.IReadOnlyDictionary{System.String,System.Collections.Generic.ICollection{System.String}}}}[])">
+            <summary>
+            Create final dictionary of namespaces with their content.
+            </summary>
+            <param name="ns">List of namespaces.</param>
+            <returns>Frozen dictionary of namespaces.</returns>
+        </member>
+        <member name="M:Medidata.Cloud.Programmability.CustomFunctions.Whitelist.DotNetListBase.N(System.String,System.Collections.Generic.KeyValuePair{System.String,System.Collections.Generic.IReadOnlyDictionary{System.String,System.Collections.Generic.ICollection{System.String}}}[])">
+            <summary>
+            Create namespace definition with its content.
+            </summary>
+            <param name="ns">Name of the namespace.</param>
+            <param name="content">List of containers within a namespace.</param>
+            <returns>Namespace definition with its content.</returns>
+        </member>
+        <member name="M:Medidata.Cloud.Programmability.CustomFunctions.Whitelist.DotNetListBase.N(System.String)">
+            <summary>
+            Create namespace definition without content.
+            This namespace indicates that anything under it considered as included into the list.
+            </summary>
+            <param name="ns">Name of the namespace.</param>
+            <returns>Namespace definition without content.</returns>
+        </member>
+        <member name="M:Medidata.Cloud.Programmability.CustomFunctions.Whitelist.DotNetListBase.C(System.String,System.Collections.Generic.KeyValuePair{System.String,System.Collections.Generic.ICollection{System.String}}[])">
+            <summary>
+            Create container definition with its content.
+            Container could be class or namespace.
+            </summary>
+            <param name="container">Name of the container.</param>
+            <param name="content">List of members within a container.</param>
+            <returns>Container definition.</returns>
+        </member>
+        <member name="M:Medidata.Cloud.Programmability.CustomFunctions.Whitelist.DotNetListBase.C(System.String)">
+            <summary>
+            Create container definition without.
+            Container could be class or namespace.
+            </summary>
+            <param name="container">Name of the container.</param>
+            <returns>Container definition.</returns>
+        </member>
+        <member name="M:Medidata.Cloud.Programmability.CustomFunctions.Whitelist.DotNetListBase.M(System.String,System.String[])">
+            <summary>
+            Create member definition with set of possible arguments.
+            This overload creates only class members, specifically methods with defined argument types.
+            </summary>
+            <param name="member">Name of the member.</param>
+            <param name="arguments">List of strings representing argument types. One string per method overload.</param>
+            <returns>Member definition.</returns>
+        </member>
+        <member name="M:Medidata.Cloud.Programmability.CustomFunctions.Whitelist.DotNetListBase.M(System.String)">
+            <summary>
+            Create member definition without content.
+            Member can represent class member (i.e. Property or Method) or namespace member (i.e. Class or Enum).
+            </summary>
+            <param name="member">Name of the member.</param>
+            <returns>Member definition.</returns>
+        </member>
+    </members>
+</doc>

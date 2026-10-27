@@ -1,0 +1,4298 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Medidata.Utilities</name>
+    </assembly>
+    <members>
+        <member name="T:Medidata.Utilities.AESEncryption">
+            <summary>
+            This class uses a symmetric key algorithm (Advanced Encryption Standard) to encrypt and
+            decrypt data. As long as encryption and decryption routines use the same
+            parameters to generate the keys, the keys are guaranteed to be the same.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.AESEncryption.Encrypt(System.String)">
+            <summary>
+            Encrypts a string using default key, iv and salt
+            </summary>
+            <param name="text">Text to be encrypted</param>
+            <returns>Encrypted data with default key.</returns>
+        </member>
+        <member name="M:Medidata.Utilities.AESEncryption.Decrypt(System.String)">
+            <summary>
+            Decrypts a string using default key, iv and salt
+            </summary>
+            <param name="text">Text to be decrypted</param>
+            <returns>Decrypted data with default key.</returns>
+        </member>
+        <member name="M:Medidata.Utilities.AESEncryption.Encrypt(System.Byte[],System.Byte[],System.Byte[])">
+            <summary>
+            Encrypts data using default key, iv and salt
+            </summary>
+            <param name="data">Data to be encrypted</param>
+            <param name="key">Key that will be used for encrypting</param>
+            <param name="iv">Initialization vector use by the encryption</param>
+            <returns>Encrypted data with default key, iv and salt</returns>
+        </member>
+        <member name="M:Medidata.Utilities.AESEncryption.Decrypt(System.Byte[],System.Byte[],System.Byte[])">
+            <summary>
+            Decrypts data using default key, iv and salt
+            </summary>
+            <param name="data">Data to be decrypted</param>
+            <param name="key">Key that will be used for decrypting</param>
+            <param name="iv">Initialization vector use by the decryption</param>
+            <returns>Decrypted data with default key, iv and salt</returns>
+        </member>
+        <member name="M:Medidata.Utilities.AESEncryption.EncryptText(System.String,System.Byte[],System.Byte[])">
+            <summary>
+            Encrypts data using default key, iv and salt
+            </summary>
+            <param name="text">Data to be encrypted</param>
+            <param name="key">Key that will be used for encrypting</param>
+            <param name="iv">Initialization vector use by the encryption</param>
+            <returns>Encrypted data with default key, iv and salt</returns>
+        </member>
+        <member name="M:Medidata.Utilities.AESEncryption.DecryptText(System.String,System.Byte[],System.Byte[])">
+            <summary>
+            Decrypts data using default key, iv and salt
+            </summary>
+            <param name="text">Data to be decrypted</param>
+            <param name="key">Key that will be used for encrypting</param>
+            <param name="iv">Initialization vector use by the encryption</param>
+            <returns>Decrypted data with default key, iv and salt</returns>
+        </member>
+        <member name="M:Medidata.Utilities.AESEncryption.EncryptData(System.Byte[],System.Byte[],System.Byte[])">
+            <summary>
+            Encrypts an input of bytes
+            </summary>
+            <param name="input">The full block of data to encrypt</param>
+            <param name="keyBytes">The key input</param>
+            <param name="ivBytes">The initialization vector for the encryption method</param>
+            <returns>The encrypted full block of data</returns>
+        </member>
+        <member name="M:Medidata.Utilities.AESEncryption.EncryptData(System.String,System.Byte[],System.Byte[])">
+            <summary>
+            Encrypts a string
+            </summary>
+            <param name="plainText">Text to be encrypted</param>
+            <param name="keyBytes">Password to decrypt with</param>
+            <param name="ivBytes">Needs to be 16 ASCII characters long</param>
+            <returns>An encrypted string</returns>
+        </member>
+        <member name="M:Medidata.Utilities.AESEncryption.DecryptData(System.Byte[],System.Byte[],System.Byte[])">
+            <summary>
+            Decrypts full block of data
+            </summary>
+            <param name="input">The full encrypted block to be decrpted</param>
+            <param name="keyBytes">The symmetric key</param>
+            <param name="ivBytes">The initialization vector</param>
+            <returns>A decrypted block</returns>
+        </member>
+        <member name="M:Medidata.Utilities.AESEncryption.DecryptData(System.String,System.Byte[],System.Byte[])">
+            <summary>
+            Decrypts a string
+            </summary>
+            <param name="cipherText">Text to be decrypted</param>
+            <param name="keyBytes">Password to decrypt with</param>
+            <param name="ivBytes">Needs to be 16 ASCII characters long</param>
+            <returns>A decrypted string</returns>
+        </member>
+        <member name="T:Medidata.Utilities.CollectionHelper">
+            <summary>
+            Helper class for collection utility methods.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.CollectionHelper.CollectionToDelimitedString(System.Collections.IEnumerable,System.Char)">
+            <summary>
+             Returns a delimited string to represent the passed collection.
+             </summary>
+             <param name="collection">Collection</param>
+             <param name="delimiter">Separator/delimiter</param>
+             <returns>String representation of the collection.</returns>
+        </member>
+        <member name="M:Medidata.Utilities.CollectionHelper.DelimitedStringToArrayList(System.String,System.Type,System.Char)">
+            <summary>
+            Turns a delimited string into an arraylist.
+            </summary>
+            <param name="delimited">Delimited string</param>
+            <param name="elementType">Type of elements in the target list</param>
+            <param name="delimiter">Separator/delimiter</param>
+            <returns>An arraylist of objects represented by the passed string.</returns>
+        </member>
+        <member name="M:Medidata.Utilities.CollectionHelper.CreateQueryString(System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Creates a query string
+            </summary>
+            <param name="Collection">Collection of names and values</param>
+            <returns>Query string</returns>
+        </member>
+        <member name="T:Medidata.Utilities.CompressableHashtable">
+            <summary>
+            Hashtable that compresses and uncompresses on serialization/deserialization
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.CompressableHashtable.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Medidata.Utilities.CompressableHashtable"/> class.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.CompressableHashtable.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Medidata.Utilities.CompressableHashtable"/> class.
+            </summary>
+            <param name="info">A <see cref="T:System.Runtime.Serialization.SerializationInfo"/> object containing the information required to serialize the <see cref="T:System.Collections.Hashtable"/>.</param>
+            <param name="context">A <see cref="T:System.Runtime.Serialization.StreamingContext"/> object containing the source and destination of the serialized stream associated with the <see cref="T:System.Collections.Hashtable"/>.</param>
+            <exception cref="T:System.ArgumentNullException">
+                <paramref name="info"/> is <see langword="null"/>.</exception>
+        </member>
+        <member name="M:Medidata.Utilities.CompressableHashtable.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Implements the <see cref="T:System.Runtime.Serialization.ISerializable"/> interface and returns the data
+            needed to serialize the <see cref="T:System.Collections.Hashtable"/>.
+            </summary>
+            <param name="info">A <see cref="T:System.Runtime.Serialization.SerializationInfo"/> object containing the information required to serialize the <see cref="T:System.Collections.Hashtable"/>.</param>
+            <param name="context">A <see cref="T:System.Runtime.Serialization.StreamingContext"/> object containing the source and destination of the serialized stream associated with the <see cref="T:System.Collections.Hashtable"/>.</param>
+            <exception cref="T:System.ArgumentNullException">
+                <paramref name="info"/> is <see langword="null"/>.</exception>
+        </member>
+        <member name="T:Medidata.Utilities.ContextStore">
+            <summary>
+            Utility class for getting an IDictionary that represents a cache of items for the current context.
+            Possible contexts are in ContextStoreType enum.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.ContextStore.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Medidata.Utilities.ContextStore"/> class.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.ContextStore.CurrentContextStoreType">
+            <summary>
+            Gets the type of the current context store.
+            </summary>
+            <value>The type of the current context store.</value>
+        </member>
+        <member name="P:Medidata.Utilities.ContextStore.Current">
+            <summary>
+            Gets the current context storage object.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.ContextStore.GetContextDictionary``2(System.String)">
+            <summary>
+            Get a Dictionary&lt;TKey, TValue&gt; from the current ContextStore. If it does not exist, create one.
+            </summary>
+            <typeparam name="TKey">The type of the dictionary key.</typeparam>
+            <typeparam name="TValue">The type of the dictionary value.</typeparam>
+            <param name="contextKey">The context key.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Medidata.Utilities.ContextStore.GetThreadContextItems">
+            <summary>
+            Gets the thread context storage object.
+            </summary>
+            <returns>Hashtable</returns>
+        </member>
+        <member name="T:Medidata.Utilities.ContextStoreType">
+            <summary>
+            Represents possible context types.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.ContextStoreType.Undefined">
+            <summary>
+            Undefined context for cache
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.ContextStoreType.Web">
+            <summary>
+            HttpContext.Current.Items
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.ContextStoreType.Thread">
+            <summary>
+            ThreadStatic Hashtable
+            </summary>
+        </member>
+        <member name="T:Medidata.Utilities.CSharpCodeFormatter">
+            <summary>
+            CSharp Code Formatter.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.CSharpCodeFormatter.GetNewLine(System.Int32)">
+            <summary>
+            Gets the new line string.
+            </summary>
+            <param name="parenthesisCount">The parenthesis count.</param>
+            <returns>The New Line String.</returns>
+        </member>
+        <member name="M:Medidata.Utilities.CSharpCodeFormatter.FormatCode(System.IO.TextReader)">
+            <summary>
+            Formats the code.
+            </summary>
+            <param name="reader">The reader.</param>
+            <returns>Formatted code.</returns>
+        </member>
+        <member name="M:Medidata.Utilities.CSharpCodeFormatter.FormatCodeFromFile(System.String)">
+            <summary>
+            Formats the code from a file.
+            </summary>
+            <param name="fileName">Name of the file.</param>
+            <returns>Formatted code.</returns>
+        </member>
+        <member name="M:Medidata.Utilities.CSharpCodeFormatter.FormatCode(System.String)">
+            <summary>
+            Formats the code.
+            </summary>
+            <param name="code">The code.</param>
+            <returns>Formatted code.</returns>
+        </member>
+        <member name="M:Medidata.Utilities.CSharpCodeFormatter.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Medidata.Utilities.CSharpCodeFormatter"/> class.
+            </summary>
+        </member>
+        <member name="T:Medidata.Utilities.DateHelper">
+            <summary>
+            A class to hold helper functions for DateTimes
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.DateHelper.SqlMinimumDate">
+            <summary>
+            This is the supported minimum datetime value for SQL Server
+            </summary>
+        </member>
+        <member name="T:Medidata.Utilities.DefaultSystemClock">
+            <summary>
+            Default system clock implementation that fetches the real system time.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.DefaultSystemClock.UtcNow">
+            <inheritdoc />
+        </member>
+        <member name="T:Medidata.Utilities.EnumExtensions">
+            <summary>
+            A class that hold extension methods for Enums.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.EnumExtensions.ContainsFlag(System.Enum,System.Enum)">
+            <summary>
+            Determines whether one or more bit <c>Fields</c> are set in the current instance.
+            </summary>
+            <param name="value">Current enum.</param>
+            <param name="flag">An enumeration value.</param>
+            <returns><c>true</c> if the bit <c>Field</c> or bit <c>Fields</c> that are set in flag are also set in the current instance; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="T:Medidata.Utilities.Excel.Cell">
+            <summary>
+            Cell in a worksheet row.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.Cell.#ctor(System.Object)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Medidata.Utilities.Excel.Cell"/> class.
+            </summary>
+            <param name="value">The value.</param>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.Cell.Comment">
+            <summary>
+            Gets or sets the comment.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.Cell.ColIndex">
+            <summary>
+            Gets or sets the column index.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.Cell.LinkToWorksheetName">
+            <summary>
+            Gets or sets the name of the link to worksheet.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.Cell.ValidationForAssistanceOnly">
+            <summary>
+            If true, allows free input in addition to validation choices.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.Cell.ValidationString">
+            <summary>
+            Gets or sets the validation string.
+            </summary>
+            <value>The validation string.</value>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.Cell.IsProtected">
+            <summary>
+            Set to true to assign the default protected style. Will only have effect if the style assignment is null.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.Cell.IsValidationCell">
+            <summary>
+            Is this cell a copy of a cell from another worksheet used to populate a validation dropdown on this worksheet?
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.Cell.ColumnName">
+            <summary>
+            Gets or sets the name of the column.
+            </summary>
+            <value>The name of the column.</value>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.Cell.ValidationColumn">
+            <summary>
+            A column -- in this worksheet or another -- used to populate the validation dropdown for this cell.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.Cell.Value">
+            <summary>
+            Value of the cell's data.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.Cell.Style">
+            <summary>
+            Style of this cell.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.Cell.DataType">
+            <summary>
+            Type of this cell's data.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.Cell.WriteXml(System.Xml.XmlTextWriter)">
+            <summary>
+            Generates Xml-representation of the cell.
+            </summary>
+            <param name="writer"></param>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.Cell.WriteXmlString(System.Xml.XmlTextWriter,System.String)">
+            <summary>
+            Ensures correct, Excel-compliant output of the passed string.
+            </summary>
+            <param name="xw">XmlTextWriter</param>
+            <param name="str">String</param>
+        </member>
+        <member name="T:Medidata.Utilities.Excel.DataType">
+            <summary>
+            Datatype
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.Excel.DataType.Number">
+            <summary>
+            Number
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.Excel.DataType.DateTime">
+            <summary>
+            DateTime
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.Excel.DataType.Boolean">
+            <summary>
+            Boolean
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.Excel.DataType.String">
+            <summary>
+            String
+            </summary>
+        </member>
+        <member name="T:Medidata.Utilities.Excel.CellCollection">
+            <summary>
+            Collection of cells
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.CellCollection.Item(System.Int32)">
+            <summary>
+            Get indexed Cell.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.CellCollection.Add(Medidata.Utilities.Excel.Cell)">
+            <summary>
+            Method implementation from the CollectionBase class.
+            </summary>
+            <param name="CellItem">Cell object</param>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.CellCollection.AddRange(Medidata.Utilities.Excel.CellCollection)">
+            <summary>
+            Adds another CellCollection object to this one.
+            </summary>
+            <param name="cells">CellCollection object to add.</param>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.CellCollection.Remove(Medidata.Utilities.Excel.Cell)">
+            <summary>
+            Method implementation from the CollectionBase class.
+            </summary>
+            <param name="cellItem">Cell object</param>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.CellCollection.GetByColumnName(System.String)">
+            <summary>
+            Gets cell by column name
+            </summary>
+            <param name="columnName">Name of the column.</param>
+            <returns>cell</returns>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.CellCollection.CellExists(System.String)">
+            <summary>
+            Checks whether there is a cell in the specified column.
+            </summary>
+        </member>
+        <member name="T:Medidata.Utilities.Excel.Column">
+            <summary>
+            Summary description for Column.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.Column.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Medidata.Utilities.Excel.Column"/> class.
+            </summary>
+            <param name="name">The name.</param>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.Column.IsHidden">
+            <summary>
+            Gets or sets a value indicating whether this instance is hidden.
+            </summary>
+            <value><c>true</c> if this instance is hidden; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.Column.CaptionComment">
+            <summary>
+            Gets or sets the caption comment.
+            </summary>
+            <value>The caption comment.</value>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.Column.AutoFitWidth">
+            <summary>
+            Gets or sets a value indicating whether [auto fit width].
+            </summary>
+            <value><c>true</c> if [auto fit width]; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.Column.IndexInWorksheet">
+            <summary>
+            Gets the index in worksheet.
+            </summary>
+            <value>The index in worksheet.</value>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.Column.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+            <value>The name.</value>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.Column.Style">
+            <summary>
+            Gets or sets the style.
+            </summary>
+            <value>The style.</value>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.Column.Width">
+            <summary>
+            Gets or sets the width.
+            </summary>
+            <value>The width.</value>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.Column.WriteXml(System.Xml.XmlTextWriter)">
+            <summary>
+            Writes the XML.
+            </summary>
+            <param name="writer">The writer.</param>
+        </member>
+        <member name="T:Medidata.Utilities.Excel.ColumnCollection">
+            <summary>
+            Collection of columns.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.ColumnCollection.Item(System.Int32)">
+            <summary>
+            Get indexed Column.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.ColumnCollection.Add(Medidata.Utilities.Excel.Column)">
+            <summary>
+            Method implementation from the CollectionBase class.
+            </summary>
+            <param name="ColumnItem">Column object</param>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.ColumnCollection.AddRange(Medidata.Utilities.Excel.ColumnCollection)">
+            <summary>
+            Adds another ColumnCollection object to this one.
+            </summary>
+            <param name="columns">ColumnCollection object to add.</param>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.ColumnCollection.Remove(Medidata.Utilities.Excel.Column)">
+            <summary>
+            Method implementation from the CollectionBase class.
+            </summary>
+            <param name="columnItem">Column object</param>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.ColumnCollection.GetByName(System.String)">
+            <summary>
+            Gets column by name.
+            </summary>
+            <param name="name">The name.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Medidata.Utilities.Excel.ExcelObject">
+            <summary>
+            Summary description for ExcelObject.
+            </summary>
+        </member>
+        <member name="T:Medidata.Utilities.Excel.ExcelObjectCollection">
+            <summary>
+            Collection of ExcelObjects.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.ExcelObjectCollection.Item(System.Int32)">
+            <summary>
+            Get indexed ExcelObject.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.ExcelObjectCollection.Add(Medidata.Utilities.Excel.ExcelObject)">
+            <summary>
+            Method implementation from the CollectionBase class.
+            </summary>
+            <param name="obj">ExcelObject object</param>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.ExcelObjectCollection.AddRange(Medidata.Utilities.Excel.ExcelObjectCollection)">
+            <summary>
+            Adds another ExcelObjectCollection object to this one.
+            </summary>
+            <param name="objs">ExcelObjectCollection to add.</param>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.ExcelObjectCollection.LinkToSheet(Medidata.Utilities.Excel.XmlWorksheet)">
+            <summary>
+            Links to sheet.
+            </summary>
+            <param name="sheet">The sheet.</param>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.ExcelObjectCollection.LinkToSheet(System.String,Medidata.Utilities.Excel.XmlWorkbook)">
+            <summary>
+            Links to sheet given sheet name and workbook.
+            </summary>
+            <param name="sheetName">Name of the sheet.</param>
+            <param name="book">The book.</param>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.ExcelObjectCollection.LinkToBook(Medidata.Utilities.Excel.XmlWorkbook)">
+            <summary>
+            Links to book.
+            </summary>
+            <param name="book">The book.</param>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.ExcelObjectCollection.Remove(Medidata.Utilities.Excel.ExcelObject)">
+            <summary>
+            Method implementation from the CollectionBase class.
+            </summary>
+            <param name="obj">ExcelObject object</param>
+        </member>
+        <member name="T:Medidata.Utilities.Excel.Row">
+            <summary>
+            Summary description for Row.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.Excel.Row.m_cells">
+            <summary>
+            Cells in the row
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.Excel.Row.m_autofitHeight">
+            <summary>
+            Autofit height?
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.Excel.Row.m_worksheet">
+            <summary>
+            Worksheet
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.Excel.Row.m_index">
+            <summary>
+            Row index on the worksheet. 0-based not including column captions.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.Row.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Medidata.Utilities.Excel.Row"/> class.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.Row.HasLoadedData">
+            <summary>
+            Gets a value indicating whether [does row have data from load].
+            </summary>
+            <value>
+                <c>true</c> if [does row have data from load]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.Row.UserWorksheetIndex">
+            <summary>
+            Gets the index of the user worksheet.
+            </summary>
+            <value>The index of the user worksheet.</value>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.Row.Index">
+            <summary>
+            Gets the index.
+            </summary>
+            <value>The index.</value>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.Row.Worksheet">
+            <summary>
+            Gets or sets the worksheet.
+            </summary>
+            <value>The worksheet.</value>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.Row.AutofitHeight">
+            <summary>
+            Autofit height?
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.Row.SetCell(System.String,Medidata.Utilities.Excel.Cell)">
+            <summary>
+            Adds or modifies existing (based on column name)
+            </summary>
+            <param name="columnName"></param>
+            <param name="cell"></param>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.Row.Load(System.Xml.XmlTextReader)">
+            <summary>
+            Loads the row from the reader.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.Row.GetCellCount">
+            <summary>
+            Gets count of all cells in the row.
+            </summary>
+            <returns>int</returns>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.Row.GetCell(System.String)">
+            <summary>
+            Gets a cell by column name.
+            </summary>
+            <param name="columnName">Column name</param>
+            <returns>Cell</returns>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.Row.CellExists(System.String)">
+            <summary>
+            Does the cell exist in the specified column?
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.Row.GetValue(System.String)">
+            <summary>
+            Gets the value of the cell associated with the given column.
+            If the given column does not exist, the empty string is returned.
+            </summary>
+            <param name="columnName">Name of the column.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.Row.GetCell(System.Int32)">
+            <summary>
+            Gets a cell by 0-based index.
+            </summary>
+            <param name="cellIndex">Index</param>
+            <returns>Cell</returns>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.Row.WriteXml(System.Xml.XmlTextWriter)">
+            <summary>
+            Generates Xml-representation of the row.
+            </summary>
+            <param name="writer">XmlTextWriter</param>
+        </member>
+        <member name="T:Medidata.Utilities.Excel.RowCollection">
+            <summary>
+            Collection of rows.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.RowCollection.Item(System.Int32)">
+            <summary>
+            Get indexed Row.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.RowCollection.AddToCollection(Medidata.Utilities.Excel.Row)">
+            <summary>
+            Adds a row to the collection. For internal use -- to add a row to a worksehet, use XmlWorksheet.AddRow().
+            </summary>
+            <param name="RowItem"></param>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.RowCollection.Remove(Medidata.Utilities.Excel.Row)">
+            <summary>
+            Method implementation from the CollectionBase class.
+            </summary>
+            <param name="rowItem">Row object</param>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.RowCollection.SortAlphabetically(System.String[])">
+            <summary>
+            Sorts the worksheet alphabetically by passed column names.
+            </summary>
+            <param name="columnNames">The column names.</param>
+        </member>
+        <member name="T:Medidata.Utilities.Excel.Style">
+            <summary>
+            Cell style.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.Style.#ctor(System.String)">
+            <summary>
+            The sole constructor.
+            </summary>
+            <param name="styleID">String ID to identify the style within a workbook. Make sure it is unique within the host workbook. An empty string will create the default style for the workbook.</param>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.Style.Color">
+            <summary>
+            Hex value for the background color.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.Style.TextColor">
+            <summary>
+            Gets or sets the color of the text in the cell.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.Style.IsProtected">
+            <summary>
+            Do cells with this style need to be protected?
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.Style.HAlignment">
+            <summary>
+            Horizontal alignment
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.Style.VAlignment">
+            <summary>
+            Vertical alignment
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.Style.FontFamily">
+            <summary>
+            Font family
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.Style.IsBold">
+            <summary>
+            Bold?
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.Style.IsItalic">
+            <summary>
+            Italic?
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.Style.WrapText">
+            <summary>
+            Wrap text?
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.Style.FontSize">
+            <summary>
+            Font size
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.Style.StyleID">
+            <summary>
+            Style ID
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.Style.GetBorders">
+            <summary>
+            Gets the borders.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.Style.SetBorders(Medidata.Utilities.Excel.Style.Border[])">
+            <summary>
+            Sets the borders.
+            </summary>
+            <param name="borders">The borders.</param>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.Style.SetBorder(Medidata.Utilities.Excel.Style.Border)">
+            <summary>
+            Adds a border.
+            </summary>
+            <param name="border">The border.</param>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.Style.WriteXml(System.Xml.XmlTextWriter)">
+            <summary>
+            Writes Xml-representation of the style
+            </summary>
+            <param name="writer">XmlTextWriter</param>
+        </member>
+        <member name="T:Medidata.Utilities.Excel.Style.Border">
+            <summary>
+            Represents one or more borders.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.Excel.Style.Border.Weight">
+            <summary>
+            Weight of border.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.Excel.Style.Border.Position">
+            <summary>
+            BorderPosition.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.Excel.Style.Border.Color">
+            <summary>
+            Hex Color.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.Style.Border.#ctor(Medidata.Utilities.Excel.BorderPosition,System.Int32,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Medidata.Utilities.Excel.Style.Border"/> struct.
+            </summary>
+            <param name="position">The positions.</param>
+            <param name="weight">The weight.</param>
+            <param name="color">The color.</param>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.Style.Border.Equals(System.Object)">
+            <summary>
+            Determines whether the specified <see cref="T:System.Object"/> is equal to the current <see cref="T:System.Object"/>.
+            </summary>
+            <param name="obj">The <see cref="T:System.Object"/> to compare with the current <see cref="T:System.Object"/>.</param>
+            <returns>
+                <see langword="true"/> if the specified <see cref="T:System.Object"/> is equal to the
+            current <see cref="T:System.Object"/>; otherwise, <see langword="false"/>.
+            </returns>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.Style.Border.op_Equality(Medidata.Utilities.Excel.Style.Border,Medidata.Utilities.Excel.Style.Border)">
+            <summary>
+            Operator ==s the specified obj1.
+            </summary>
+            <param name="obj1">The obj1.</param>
+            <param name="obj2">The obj2.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.Style.Border.op_Inequality(Medidata.Utilities.Excel.Style.Border,Medidata.Utilities.Excel.Style.Border)">
+            <summary>
+            Operator !=s the specified obj1.
+            </summary>
+            <param name="obj1">The obj1.</param>
+            <param name="obj2">The obj2.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.Style.Border.GetHashCode">
+            <summary>
+            Serves as a hash function for a particular type, suitable
+            for use in hashing algorithms and data structures like a hash table.
+            </summary>
+            <returns>
+            A hash code for the current <see cref="T:System.Object"/>.
+            </returns>
+        </member>
+        <member name="T:Medidata.Utilities.Excel.HorizontalAlignment">
+            <summary>
+            Horizontal alignment
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.Excel.HorizontalAlignment.Automatic">
+            <summary>
+            Auto
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.Excel.HorizontalAlignment.Left">
+            <summary>
+            Left
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.Excel.HorizontalAlignment.Center">
+            <summary>
+            Center
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.Excel.HorizontalAlignment.Right">
+            <summary>
+            Right
+            </summary>
+        </member>
+        <member name="T:Medidata.Utilities.Excel.VerticalAlignment">
+            <summary>
+            Vertical alignment
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.Excel.VerticalAlignment.Automatic">
+            <summary>
+            Auto
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.Excel.VerticalAlignment.Top">
+            <summary>
+            Top
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.Excel.VerticalAlignment.Bottom">
+            <summary>
+            Bottom
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.Excel.VerticalAlignment.Center">
+            <summary>
+            Center
+            </summary>
+        </member>
+        <member name="T:Medidata.Utilities.Excel.FontFamily">
+            <summary>
+            FontFamily
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.Excel.FontFamily.Automatic">
+            <summary>
+            Auto
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.Excel.FontFamily.Decorative">
+            <summary>
+            Decorative
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.Excel.FontFamily.Modern">
+            <summary>
+            Modern
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.Excel.FontFamily.Roman">
+            <summary>
+            Roman
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.Excel.FontFamily.Script">
+            <summary>
+            Script
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.Excel.FontFamily.Swiss">
+            <summary>
+            Swiss
+            </summary>
+        </member>
+        <member name="T:Medidata.Utilities.Excel.BorderPosition">
+            <summary>
+            Enum of border positions.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.Excel.BorderPosition.None">
+            <summary>
+            No border.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.Excel.BorderPosition.Bottom">
+            <summary>
+            Bottom
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.Excel.BorderPosition.Left">
+            <summary>
+            Left
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.Excel.BorderPosition.Right">
+            <summary>
+            Right
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.Excel.BorderPosition.Top">
+            <summary>
+            Top
+            </summary>
+        </member>
+        <member name="T:Medidata.Utilities.Excel.StyleCollection">
+            <summary>
+            Collection of styles
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.StyleCollection.Item(System.Int32)">
+            <summary>
+            Get indexed Style.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.StyleCollection.Add(Medidata.Utilities.Excel.Style)">
+            <summary>
+            Method implementation from the CollectionBase class.
+            </summary>
+            <param name="StyleItem">Style object</param>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.StyleCollection.FindByStyleID(System.String,System.Int32@)">
+            <summary>
+            Finds by style ID.
+            </summary>
+            <param name="styleID">The style ID.</param>
+            <param name="index">The index.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.StyleCollection.FindByStyleID(System.String)">
+            <summary>
+            Finds by style ID.
+            </summary>
+            <param name="styleID">The style ID.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.StyleCollection.AddRange(Medidata.Utilities.Excel.StyleCollection)">
+            <summary>
+            Adds another StyleCollection object to this one.
+            </summary>
+            <param name="styles">StyleCollection object to add.</param>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.StyleCollection.Remove(Medidata.Utilities.Excel.Style)">
+            <summary>
+            Method implementation from the CollectionBase class.
+            </summary>
+            <param name="styleItem">Style object</param>
+        </member>
+        <member name="T:Medidata.Utilities.Excel.XmlWorkbook">
+            <summary>
+            A singular workbook in a worksheet.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.Excel.XmlWorkbook.m_worksheets">
+            <summary>
+            Worksheets
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.Excel.XmlWorkbook.m_activeWorksheetIndex">
+            <summary>
+            Active worksheet index
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.Excel.XmlWorkbook.m_locale">
+            <summary>
+            Locale
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.Excel.XmlWorkbook.m_customProperties">
+            <summary>
+            Custom properties
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.Excel.XmlWorkbook.m_version">
+            <summary>
+            Rave Version
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.Excel.XmlWorkbook.m_renderEmptyCells">
+            <summary>
+            Render empty cells?
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorkbook.#ctor(System.String)">
+            <summary>
+            Default constructor. Defines default styles.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorkbook.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Medidata.Utilities.Excel.XmlWorkbook"/> class.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.XmlWorkbook.TitleName">
+            <summary>
+            Gets or sets the name of the cover sheet title.
+            </summary>
+            <value>The name of the title.</value>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.XmlWorkbook.RenderEmptyCells">
+            <summary>
+            Gets or sets a value indicating whether [render empty cells].
+            </summary>
+            <value><c>true</c> if [render empty cells]; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.XmlWorkbook.Worksheets">
+            <summary>
+            Gets the worksheets.
+            </summary>
+            <value>The worksheets.</value>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.XmlWorkbook.CustomProperties">
+            <summary>
+            Gets the custom properties.
+            </summary>
+            <value>The custom properties.</value>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.XmlWorkbook.Delimiter">
+            <summary>
+            Gets or sets the delimiter.
+            </summary>
+            <value>The delimiter.</value>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.XmlWorkbook.Locale">
+            <summary>
+            Gets or sets the locale.
+            </summary>
+            <value>The locale.</value>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.XmlWorkbook.Version">
+            <summary>
+            Gets or sets the version.
+            </summary>
+            <value>The version.</value>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.XmlWorkbook.ActiveWorksheetIndex">
+            <summary>
+            Index of the initially active worksheet.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.XmlWorkbook.Styles">
+            <summary>
+            Styles.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorkbook.CreateNewWorksheet(System.String)">
+            <summary>
+            Creates the new worksheet.
+            </summary>
+            <param name="name">The name.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorkbook.CreateNewWorksheetCollection">
+            <summary>
+            Creates the new worksheet collection.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorkbook.WriteRawFromFile(System.Xml.XmlTextWriter,System.String)">
+            <summary>
+            Writes the raw text from the given file.
+            </summary>
+            <param name="writer">The writer.</param>
+            <param name="path">The path.</param>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorkbook.WriteCoverSheetFromFile(System.Xml.XmlTextWriter,System.String)">
+            <summary>
+            Writes the cover sheet from file.
+            </summary>
+            <param name="writer">The writer.</param>
+            <param name="path">The path.</param>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorkbook.LoadFromFile(System.Web.HttpPostedFile)">
+            <summary>
+            Loads from file.
+            </summary>
+            <param name="file">The file.</param>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorkbook.LoadFromStream(System.IO.Stream,System.Boolean)">
+            <summary>
+            Loads from stream.
+            </summary>
+            <param name="fileStream">The file stream.</param>
+            <param name="isZipped">Zipped stream?</param>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorkbook.Clear">
+            <summary>
+            Clears this instance.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorkbook.DefineDefaultStyles">
+            <summary>
+            Defines the default styles.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorkbook.AddWorksheet(Medidata.Utilities.Excel.XmlWorksheet)">
+            <summary>
+            Adds a worksheet to the workbook.
+            </summary>
+            <param name="worksheet">Worksheet</param>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorkbook.GetWorksheet(System.String)">
+            <summary>
+            Gets worksheeet by name.
+            </summary>
+            <param name="worksheetName">Worksheet name</param>
+            <returns>XmlWorksheet</returns>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorkbook.GetWorksheet(System.Int32)">
+            <summary>
+            Gets worksheet by index.
+            </summary>
+            <param name="worksheetIndex">Worksheet index</param>
+            <returns>XmlWorksheet</returns>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorkbook.AddStyle(Medidata.Utilities.Excel.Style)">
+            <summary>
+            Adds a style. Automatically creates the corresponding alternate color style.
+            </summary>
+            <param name="style">Style</param>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorkbook.WriteXmlToStream(System.IO.Stream)">
+            <summary>
+            Writes an Xml-representation of the workbook to the passed stream.
+            </summary>
+            <param name="stream">Stream</param>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorkbook.WriteXmlToStream(System.IO.Stream,System.Boolean,System.String,ICSharpCode.SharpZipLib.Zip.ZipOutputStream)">
+            <summary>
+             Writes an Xml-representation of the workbook to the file.
+            </summary>
+            <param name="stream"></param>
+            <param name="zipIt"></param>
+            <param name="filename"></param>
+            <summary>
+            Writes the XML to stream.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorkbook.WriteXmlToStream(System.IO.Stream,System.Boolean,System.String,System.Boolean,ICSharpCode.SharpZipLib.Zip.ZipOutputStream)">
+            <summary>
+            Writes an Xml-representation of the workbook to the passed stream.
+            </summary>
+            <param name="stream">Stream</param>
+            <param name="zipIt">if set to <c>true</c> zip the file.</param>
+            <param name="filename">The filename of the zip entry, if applicable.</param>
+            <param name="excludeValidations">Writes data validations for all cells that need it.</param>
+            <param name="outputZipStream">Output ZipFile Stream declared outside and use it to add output to zip</param>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorkbook.WriteDocumentStart(System.Xml.XmlTextWriter)">
+            <summary>
+            Writes opening headers.
+            </summary>
+            <param name="writer">XmlTextWriter</param>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorkbook.WriteDocumentEnd(System.Xml.XmlTextWriter)">
+            <summary>
+            Closes the workbook
+            </summary>
+            <param name="writer">XmlWriter</param>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorkbook.WriteActiveSheet(System.Xml.XmlTextWriter)">
+            <summary>
+            Writes active sheet directive
+            </summary>
+            <param name="writer">XmlTextWriter</param>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorkbook.WriteStyles(System.Xml.XmlTextWriter)">
+            <summary>
+            Writes styles.
+            </summary>
+            <param name="writer">XmlTextWriter</param>
+        </member>
+        <member name="T:Medidata.Utilities.Excel.WorksheetIndexComparer">
+            <summary>
+            Compares by worksheet index
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.WorksheetIndexComparer.Compare(System.Object,System.Object)">
+            <summary>
+            Compares two objects and returns a value indicating whether one
+            is less than, equal to or greater than the other.
+            </summary>
+            <param name="x">First object to compare.</param>
+            <param name="y">Second object to compare.</param>
+            <returns>
+                <list type="table">
+                    <listheader>
+                        <term>Value</term>
+                        <description>Condition</description>
+                    </listheader>
+                    <item>
+                        <term> Less than zero</term>
+                        <description>
+                            <paramref name="x"/> is less than <paramref name="y"/>.</description>
+                    </item>
+                    <item>
+                        <term> Zero</term>
+                        <description>
+                            <paramref name="x"/> equals <paramref name="y"/>.</description>
+                    </item>
+                    <item>
+                        <term> Greater than zero</term>
+                        <description>
+                            <paramref name="x"/> is greater than <paramref name="y"/>.</description>
+                    </item>
+                </list>
+            </returns>
+            <exception cref="T:System.ArgumentException">
+                <para>Neither <paramref name="x"/> nor <paramref name="y"/> implements the <see cref="T:System.IComparable"/> interface.</para>
+                <para>-or-</para>
+                <para>
+                    <paramref name="x"/> and <paramref name="y"/> are of different types and neither one can handle comparisons with the other.</para>
+            </exception>
+        </member>
+        <member name="T:Medidata.Utilities.Excel.XmlConstants">
+            <summary>
+            XmlConstants.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.Excel.XmlConstants.XmlDirectoryName">
+            <summary>
+            Folder for xml files referenced by the Excel Namespace.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.Excel.XmlConstants.CoverSheetName">
+            <summary>
+            Name of cover sheet file.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.Excel.XmlConstants.CoverSheetStylesName">
+            <summary>
+            Name of cover sheet styles file.
+            </summary>
+        </member>
+        <member name="T:Medidata.Utilities.Excel.XmlWorksheet">
+            <summary>
+            Summary description for XmlWorksheet.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.Excel.XmlWorksheet.m_rows">
+            <summary>
+            Rows
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.Excel.XmlWorksheet.m_name">
+            <summary>
+            Name
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.Excel.XmlWorksheet.m_neverProtect">
+            <summary>
+            Do not protect the worksheet
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.Excel.XmlWorksheet.m_columns">
+            <summary>
+            Columns
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.Excel.XmlWorksheet.m_workbook">
+            <summary>
+            Workbook
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.Excel.XmlWorksheet.m_validationColumns">
+            <summary>
+            Validation columns
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.Excel.XmlWorksheet.m_index">
+            <summary>
+            Worksheet index
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.Excel.XmlWorksheet.m_isTemplate">
+            <summary>
+            IsTemplate
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorksheet.#ctor(System.String)">
+            <summary>
+            Default constructor.
+            </summary>
+            <param name="name"></param>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorksheet.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Medidata.Utilities.Excel.XmlWorksheet"/> class.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.XmlWorksheet.NeverProtect">
+            <summary>
+            Gets or sets a value indicating whether [never protect].
+            </summary>
+            <value><c>true</c> if [never protect]; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.XmlWorksheet.Workbook">
+            <summary>
+            Gets or sets the workbook.
+            </summary>
+            <value>The workbook.</value>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.XmlWorksheet.Rows">
+            <summary>
+            Gets the rows.
+            </summary>
+            <value>The rows.</value>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.XmlWorksheet.IsTemplate">
+            <summary>
+            Gets or sets a value indicating whether this instance is template.
+            </summary>
+            <value>
+                <c>true</c> if this instance is template; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.XmlWorksheet.SplitHorizontal">
+            <summary>
+            Gets or sets the split horizontal.
+            </summary>
+            <value>The split horizontal.</value>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.XmlWorksheet.SplitVertical">
+            <summary>
+            Gets or sets the split vertical.
+            </summary>
+            <value>The split vertical.</value>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.XmlWorksheet.Index">
+            <summary>
+            Index in workbook.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.XmlWorksheet.AltColorColumn">
+            <summary>
+            Alternates cell color based on this column name.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.XmlWorksheet.IsAutoFilter">
+            <summary>
+            Gets or sets a value indicating whether this instance is auto filter.
+            </summary>
+            <value>true if this instance is auto filter; otherwise, false.</value>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.XmlWorksheet.Name">
+            <summary>
+            Gets the name.
+            </summary>
+            <value>The name.</value>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorksheet.AlternateCellColor(System.Int32)">
+            <summary>
+            Alternates the background color of rows, each step rows.
+            </summary>
+            <param name="step">The step.</param>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorksheet.AlternateCellColor">
+            <summary>
+            Alternates the color of the cell, based on AltColorColumn.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorksheet.AlternateCellColor(System.String[])">
+            <summary>
+            Alternates the color of the cells, based on AltColorColumn.
+            </summary>
+            <param name="tokensToIgnore">String tokens to ignore when determining when to switch alternation.</param>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorksheet.LoadTable(System.Data.IDataReader)">
+            <summary>
+            Loads the table.
+            </summary>
+            <param name="dataReader">The data reader.</param>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorksheet.CreateNewRow">
+            <summary>
+            Creates the new row.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorksheet.LoadTable(System.Data.IDataReader,System.Boolean)">
+            <summary>
+            Loads the table.
+            </summary>
+            <param name="dataReader">The data reader.</param>
+            <param name="shutReader">if set to <c>true</c> [shut reader].</param>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorksheet.PopulateValidationColumnList">
+            <summary>
+            Populates the private arraylist containing validation columns.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorksheet.SetValidationColumn(Medidata.Utilities.Excel.Column)">
+            <summary>
+            Adds or modifies existing.
+            </summary>
+            <param name="column">Column</param>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorksheet.GetValidationColumnIndex(System.String)">
+            <summary>
+            Gets the index of the passed validation column. Validation columns start at column 200.
+            </summary>
+            <param name="columnName">Column name</param>
+            <returns>int</returns>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorksheet.AddRow(Medidata.Utilities.Excel.Row)">
+            <summary>
+            Adds a row.
+            </summary>
+            <param name="row"></param>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorksheet.SetColumn(Medidata.Utilities.Excel.Column)">
+            <summary>
+            Adds or modifies an existing column (if the name matches)
+            </summary>
+            <param name="column"></param>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorksheet.GetRow(System.Int32)">
+            <summary>
+            Gets row by index (0-based).
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorksheet.GetRowCount">
+            <summary>
+            Gets row count.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorksheet.GetColumn(System.String)">
+            <summary>
+            Gets column by name -- whether a validation or regular column.
+            </summary>
+            <param name="columnName">Column name</param>
+            <returns>Column</returns>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorksheet.GetColumnIndex(Medidata.Utilities.Excel.Column)">
+            <summary>
+            Gets index of the passed column.
+            </summary>
+            <param name="column"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorksheet.GetColumnIndex(System.String)">
+            <summary>
+            Gets the index of the column.
+            </summary>
+            <param name="columnName">Name of the column.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorksheet.GetColumnName(System.Int32)">
+            <summary>
+            Gets the name of the column.
+            </summary>
+            <param name="index">The index.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorksheet.CreateNewRowCollection">
+            <summary>
+            Creates the new row collection.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorksheet.GetColumn(System.Int32)">
+            <summary>
+            Gets column by index.
+            </summary>
+            <param name="columnIndex">Column index</param>
+            <returns>Column</returns>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorksheet.GetColumnCount">
+            <summary>
+            Gets column count.
+            </summary>
+            <returns>int</returns>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorksheet.WriteWorksheetOptions(System.Xml.XmlTextWriter)">
+            <summary>
+            Freeze panes.
+            </summary>
+            <param name="writer">writer</param>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorksheet.WriteXml(System.Xml.XmlTextWriter,System.Boolean)">
+            <summary>
+            Generates an Xml-representation of the worksheet.
+            </summary>
+            <param name="writer">XmlTextWriter</param>
+            <param name="excludeValidations">Writes data validations for all cells that need it.</param>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorksheet.GetValidName(System.String)">
+            <summary>
+            Returns a valid worksheet name based upon the passed suggested name.
+            </summary>
+            <param name="name">Desired worksheet name</param>
+            <returns>Valid worksheet name</returns>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorksheet.WriteColumnCaptions(System.Xml.XmlTextWriter)">
+            <summary>
+            Writes the first row in the worksheet, that contains bolded and protected column captions. This row is not a part of the m_rows collection.
+            </summary>
+            <param name="writer">XmlTextWriter</param>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorksheet.WriteDataValidations(System.Xml.XmlTextWriter)">
+            <summary>
+            Writes data validations for all cells that need it.
+            </summary>
+            <param name="writer">XmlTextWriter</param>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorksheet.SetColumnValidationColumn(System.String,Medidata.Utilities.Excel.Column)">
+            <summary>
+            Assigns a validation column for all cells in a column. If the cell has both a validation string and a validation column, the column will take precedence.
+            </summary>
+            <param name="columnName">Target column name</param>
+            <param name="valColumn">Validation column</param>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorksheet.SetColumnValidationForAssistanceOnly(System.String,System.Boolean)">
+            <summary>
+            Assigns ValidationForAssistanceOnly to each cell in the column
+            </summary>
+            <param name="columnName">Target column name</param>
+            <param name="value">ValidationForAssistanceOnly value to assign</param>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorksheet.SetColumnProtected(System.String)">
+            <summary>
+            Sets all cells in a column that don't have other style assignments to protected.
+            </summary>
+            <param name="columnName">Column name</param>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorksheet.SetSheetProtected">
+            <summary>
+            Sets all columns that don't have other style assignments to protected.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorksheet.SetColumnStyle(System.String,Medidata.Utilities.Excel.Style)">
+            <summary>
+            Sets the column style.
+            </summary>
+            <param name="columnName">Name of the column.</param>
+            <param name="style">The style.</param>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorksheet.SetColumnValidationString(System.String,System.String)">
+            <summary>
+            Sets validation string for all cells in a column. If the cell has both a validation string and a validation column, the column will take precedence.
+            </summary>
+            <param name="columnName"></param>
+            <param name="valString"></param>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorksheet.AddValidationCells">
+            <summary>
+            Adds copies of lookup columns in other worksheets to this one.
+            </summary>
+        </member>
+        <member name="T:Medidata.Utilities.Excel.XmlWorksheetCollection">
+            <summary>
+            Collection of XmlWorksheets.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.Excel.XmlWorksheetCollection.Item(System.Int32)">
+            <summary>
+            Get indexed XmlWorksheet.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorksheetCollection.FindByName(System.String)">
+            <summary>
+            Finds the worksheet by name
+            </summary>
+            <param name="name">The name.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorksheetCollection.FindByName(System.String,System.Int32@)">
+            <summary>
+            Finds the worksheet by name
+            </summary>
+            <param name="name">The name.</param>
+            <param name="index">The index.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorksheetCollection.Add(Medidata.Utilities.Excel.XmlWorksheet)">
+            <summary>
+            Method implementation from the CollectionBase class.
+            </summary>
+            <param name="XmlWorksheetItem">XmlWorksheet object</param>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorksheetCollection.AddRange(Medidata.Utilities.Excel.XmlWorksheetCollection)">
+            <summary>
+            Adds another XmlWorksheetCollection object to this one.
+            </summary>
+            <param name="xmlWorksheets">XmlWorksheetCollection object to add.</param>
+        </member>
+        <member name="M:Medidata.Utilities.Excel.XmlWorksheetCollection.Remove(Medidata.Utilities.Excel.XmlWorksheet)">
+            <summary>
+            Method implementation from the CollectionBase class.
+            </summary>
+            <param name="xmlWorksheetItem">XmlWorksheet object</param>
+        </member>
+        <member name="T:Medidata.Utilities.ExpiringHashtable`2">
+            <summary>
+            Represents an auto-expiring collection of key-and-value pairs.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.ExpiringHashtable`2.System#Collections#IDictionary#Item(System.Object)">
+            <summary>
+            Get a specific object from the Hashtable.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.ExpiringHashtable`2.Item(`0)">
+            <summary>
+            Get a specific object from the Hashtable.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.ExpiringHashtable`2.Count">
+            <summary>
+            Number of items in the Hashtable.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.ExpiringHashtable`2.System#Collections#ICollection#SyncRoot">
+            <summary>
+            When implemented by a class, gets an object that
+            can be used to synchronize access to the <see cref="T:System.Collections.ICollection"/>.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:Medidata.Utilities.ExpiringHashtable`2.System#Collections#ICollection#IsSynchronized">
+            <summary>
+            When implemented by a class, gets a value
+            indicating whether access to the <see cref="T:System.Collections.ICollection"/> is synchronized
+            (thread-safe).
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:Medidata.Utilities.ExpiringHashtable`2.IsReadOnly">
+            <summary>
+            When implemented by a class, gets a value indicating whether the <see cref="T:System.Collections.IDictionary"/>
+            is read-only.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:Medidata.Utilities.ExpiringHashtable`2.System#Collections#IDictionary#Values">
+            <summary>
+            When implemented by a class, gets an <see cref="T:System.Collections.ICollection"/> containing the values in the <see cref="T:System.Collections.IDictionary"/>.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:Medidata.Utilities.ExpiringHashtable`2.System#Collections#IDictionary#Keys">
+            <summary>
+            When implemented by a class, gets an <see cref="T:System.Collections.ICollection"/> containing the keys of the <see cref="T:System.Collections.IDictionary"/>.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:Medidata.Utilities.ExpiringHashtable`2.IsFixedSize">
+            <summary>
+            When implemented by a class, gets a value indicating whether the <see cref="T:System.Collections.IDictionary"/>
+            has a fixed size.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:Medidata.Utilities.ExpiringHashtable`2.Keys">
+            <summary>
+            When implemented by a class, gets an <see cref="T:System.Collections.ICollection{TKey}"/> containing the keys of the <see cref="T:System.Collections.IDictionary{TKey,TValue"/>.
+            </summary>
+            <value>
+             A collection of keys in the ExpiringHashtable.
+            </value>
+        </member>
+        <member name="P:Medidata.Utilities.ExpiringHashtable`2.Values">
+            <summary>
+            When implemented by a class, gets an <see cref="T:System.Collections.ICollection{TValue}"/> containing the values in the <see cref="T:System.Collections.IDictionary{TKey,TValue}"/>.
+            </summary>
+            <value>
+             A collection of keys in the ExpiringHashtable
+            </value>
+        </member>
+        <member name="M:Medidata.Utilities.ExpiringHashtable`2.#ctor">
+            <summary>
+            Constructor - creates Hashtable/ArrayList and starts expiration Timer (defaulted at Ten Minutes).
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.ExpiringHashtable`2.#ctor(System.TimeSpan)">
+            <summary>
+            Constructor - creates Hashtable/ArrayList and starts expiration Timer.
+            </summary>
+            <param name="timeout">Amount of time in minutes an object should live between accesses</param>
+        </member>
+        <member name="M:Medidata.Utilities.ExpiringHashtable`2.#ctor(System.Collections.Generic.IEqualityComparer{`0},System.TimeSpan)">
+            <summary>
+            Constructor - creates Hashtable/ArrayList and starts expiration Timer.
+            </summary>
+            <param name="iEqualityComparer"></param>
+            <param name="timeout">Amount of time in minutes an object should live between accesses</param>
+        </member>
+        <member name="M:Medidata.Utilities.ExpiringHashtable`2.#ctor(System.Collections.Generic.IEqualityComparer{`0})">
+            <summary>
+            Constructor - creates Hashtable/ArrayList and starts expiration Timer.
+            </summary>
+            <param name="iEqualityComparer"></param>
+        </member>
+        <member name="M:Medidata.Utilities.ExpiringHashtable`2.System#Collections#IDictionary#GetEnumerator">
+            <summary>
+            When implemented by a class, returns an
+            <see cref="T:System.Collections.IDictionaryEnumerator"/> for the <see cref="T:System.Collections.IDictionary"/>.
+            </summary>
+            <returns>
+            An <see cref="T:System.Collections.IDictionaryEnumerator"/> for the <see cref="T:System.Collections.IDictionary"/>.
+            </returns>
+        </member>
+        <member name="M:Medidata.Utilities.ExpiringHashtable`2.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Returns an enumerator that can iterate through a collection.
+            </summary>
+            <returns>a
+            An <see cref="T:System.Collections.IEnumerator"/>
+            that can be used to iterate through the collection.
+            </returns>
+        </member>
+        <member name="M:Medidata.Utilities.ExpiringHashtable`2.System#Collections#IDictionary#Contains(System.Object)">
+            <summary>
+            When implemented by a class, determines whether the <see cref="T:System.Collections.IDictionary"/> contains an element with the specified key.
+            </summary>
+            <param name="key">The key to locate in the <see cref="T:System.Collections.IDictionary"/>.</param>
+            <returns>
+                <see langword="true"/> if the <see cref="T:System.Collections.IDictionary"/> contains an element with the key; otherwise, <see langword="false"/>.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+                <paramref name="key "/>is <see langword="null"/>.</exception>
+        </member>
+        <member name="M:Medidata.Utilities.ExpiringHashtable`2.ContainsKey(`0)">
+            <summary>
+            When implemented by a class, determines whether the <see cref="T:System.Collections.IDictionary"/> contains an element with the specified key.
+            </summary>
+            <param name="key">The key to locate in the <see cref="T:System.Collections.IDictionary"/>.</param>
+            <returns>
+                <see langword="true"/> if the <see cref="T:System.Collections.IDictionary"/> contains an element with the key; otherwise, <see langword="false"/>.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+                <paramref name="key "/>is <see langword="null"/>.</exception>
+        </member>
+        <member name="M:Medidata.Utilities.ExpiringHashtable`2.System#Collections#ICollection#CopyTo(System.Array,System.Int32)">
+            <summary>
+            When implemented by a class, copies the elements of
+            the <see cref="T:System.Collections.ICollection"/> to an <see cref="T:System.Array"/>, starting at a particular <see cref="T:System.Array"/> index.
+            </summary>
+            <param name="array">The one-dimensional <see cref="T:System.Array"/> that is the destination of the elements copied from
+                <see cref="T:System.Collections.ICollection"/>. The <see cref="T:System.Array"/> must have zero-based indexing.</param>
+            <param name="index">The zero-based index in <paramref name="array"/> at which copying begins.</param>
+            <exception cref="T:System.ArgumentNullException">
+                <paramref name="array"/> is <see langword="null"/>.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+                <paramref name="index"/> is less than zero.</exception>
+            <exception cref="T:System.ArgumentException">
+                <para>
+                    <paramref name="array"/> is multidimensional.</para>
+                <para>-or-</para>
+                <para>
+                    <paramref name="index"/> is equal to or greater than the length of <paramref name="array"/>.</para>
+                <para>-or-</para>
+                <para>The number of elements in the source <see cref="T:System.Collections.ICollection"/> is greater than the available space from <paramref name="index"/>
+                    to the end of the destination <paramref name="array"/>.</para>
+            </exception>
+            <exception cref="T:System.InvalidCastException">The type of the source <see cref="T:System.Collections.ICollection"/> cannot be
+                cast automatically to the type of the destination <paramref name="array"/>.</exception>
+        </member>
+        <member name="M:Medidata.Utilities.ExpiringHashtable`2.System#Collections#IDictionary#Add(System.Object,System.Object)">
+            <summary>
+            Add an item to the Hashtable.
+            </summary>
+            <param name="key">Key</param>
+            <param name="value">Value to add</param>
+        </member>
+        <member name="M:Medidata.Utilities.ExpiringHashtable`2.Add(`0,`1)">
+            <summary>
+            Add an item to the Hashtable.
+            </summary>
+            <param name="key">Key</param>
+            <param name="value">Value to add</param>
+        </member>
+        <member name="M:Medidata.Utilities.ExpiringHashtable`2.Clear">
+            <summary>
+            Clear the ExpiringHashtable.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.ExpiringHashtable`2.Dispose">
+            <summary>
+            Dispose of the ExpiringHashtable.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.ExpiringHashtable`2.System#Collections#IDictionary#Remove(System.Object)">
+            <summary>
+            Remove a specific item from the Hashtable.
+            </summary>
+            <param name="key">Key of object to remove</param>
+        </member>
+        <member name="M:Medidata.Utilities.ExpiringHashtable`2.Remove(`0)">
+            <summary>
+            Remove a specific item from the Hashtable.
+            </summary>
+            <param name="key">Key of object to remove</param>
+        </member>
+        <member name="M:Medidata.Utilities.ExpiringHashtable`2.ExpireItems(System.Object,System.Timers.ElapsedEventArgs)">
+            <summary>
+            Begin the expiration.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.ExpiringHashtable`2.GetOrAdd(`0,System.Func{`0,`1})">
+            <summary>
+             Adds a key/value pair to the ExpiringHashtable
+             by using the specified function, if the key does not already exist.
+            </summary>
+            <param name="key">The key of the element to add.</param>
+            <param name="valueFactory">The function used to generate a value for the key</param>
+            <returns>
+             The value for the key. This will be either the existing value for the key if
+             the key is already in the dictionary, or the new value for the key as returned
+             by valueFactory if the key was not in the dictionary.
+            </returns>
+        </member>
+        <member name="M:Medidata.Utilities.ExpiringHashtable`2.TryGetValue(`0,`1@)">
+            <summary>
+            Attempts to get the value associated with the specified key from the ExpiringHashtable.
+            </summary>
+            <param name="key">The key of the value to get.</param>
+            <param name="value">
+            When this method returns, contains the object from the ExpiringHashtable
+            that has the specified key, or the default value of , if the operation failed.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Medidata.Utilities.ExpiringHashtable`2.CopyTo(System.Collections.Generic.KeyValuePair{`0,`1}[],System.Int32)">
+            <summary>
+             Copies the elements of the ExpiringHashtable to an System.Array,
+             starting at a particular System.Array index.
+            </summary>
+            <param name="array">
+             The one-dimensional System.Array that is the destination of the elements copied
+             from ExpiringHashtable. The System.Array must have zero-based
+             indexing.
+            </param>
+            <param name="arrayIndex"></param>
+        </member>
+        <member name="M:Medidata.Utilities.ExpiringHashtable`2.Remove(System.Collections.Generic.KeyValuePair{`0,`1})">
+            <summary>
+            Removes the first occurrence of a specific object from the ExpiringHashtable.
+            </summary>
+            <param name="item">The object to remove from the ExpiringHashtable</param>
+            <returns>
+             true if item was successfully removed from the ExpiringHashtable;
+             otherwise, false. This method also returns false if item is not found in the
+             original ExpiringHashtable.
+            </returns>
+        </member>
+        <member name="M:Medidata.Utilities.ExpiringHashtable`2.GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the collection.
+            </summary>
+            <returns>
+            A System.Collections.Generic.IEnumerator`1 that can be used to iterate through the collection.
+            </returns>
+        </member>
+        <member name="T:Medidata.Utilities.ExpiringHashtable`2.ExpiringHashtableItem">
+            <summary>
+            Represents a single item in the Hashtable.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.ExpiringHashtable`2.ExpiringHashtableItem.Value">
+            <summary>
+            Object being cached.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.ExpiringHashtable`2.ExpiringHashtableItem.LastAccessed">
+            <summary>
+            DateTime object was last accessed.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.ExpiringHashtable`2.ExpiringHashtableItem.Renew">
+            <summary>
+            Renew the object.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.ExpiringHashtable`2.ExpiringHashtableItem.#ctor(`1)">
+            <summary>
+            Constructor initializes values.
+            </summary>
+            <param name="value">Object being cached</param>
+        </member>
+        <member name="T:Medidata.Utilities.ExpiringHashtable`2.ExpiringHashtableEnumerator">
+            <summary>
+            Dictionary enumerator.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.ExpiringHashtable`2.ExpiringHashtableEnumerator.Key">
+            <summary>
+            When implemented by a class, gets the key of the current dictionary entry.
+            </summary>
+            <value></value>
+            <exception cref="T:System.InvalidOperationException">
+                <para>The <see cref="T:System.Collections.IDictionaryEnumerator"/> is positioned before the first entry of the dictionary or after the last entry.</para>
+                <para> -or-</para>
+                <para>The dictionary is modified after the <see cref="T:System.Collections.IDictionaryEnumerator"/> was created.</para>
+            </exception>
+        </member>
+        <member name="P:Medidata.Utilities.ExpiringHashtable`2.ExpiringHashtableEnumerator.Value">
+            <summary>
+            When implemented by a class, gets the value of the current dictionary entry.
+            This is necessary because we store objects as an ExpiringHashtableItem but we want to operate on them as the object they actually are.
+            </summary>
+            <value></value>
+            <exception cref="T:System.InvalidOperationException">
+                <para>The <see cref="T:System.Collections.IDictionaryEnumerator"/> is positioned before the first entry of the dictionary or after the last entry.</para>
+                <para> -or-</para>
+                <para>The dictionary is modified after the <see cref="T:System.Collections.IDictionaryEnumerator"/> was created.</para>
+            </exception>
+        </member>
+        <member name="P:Medidata.Utilities.ExpiringHashtable`2.ExpiringHashtableEnumerator.Entry">
+            <summary>
+            When implemented by a class, gets both the key and the value of the current dictionary entry.
+            </summary>
+            <value></value>
+            <exception cref="T:System.InvalidOperationException">
+                <para>The <see cref="T:System.Collections.IDictionaryEnumerator"/> is positioned before the first entry of the dictionary or after the last entry.</para>
+                <para> -or-</para>
+                <para>The dictionary is modified after the <see cref="T:System.Collections.IDictionaryEnumerator"/> was created.</para>
+            </exception>
+        </member>
+        <member name="M:Medidata.Utilities.ExpiringHashtable`2.ExpiringHashtableEnumerator.Reset">
+            <summary>
+            Sets the enumerator to its initial position, which is before
+            the first element in the collection.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">The collection was modified after the enumerator was created.</exception>
+        </member>
+        <member name="P:Medidata.Utilities.ExpiringHashtable`2.ExpiringHashtableEnumerator.Current">
+            <summary>
+            Gets the current element in the collection.
+            </summary>
+            <value></value>
+            <exception cref="T:System.InvalidOperationException">
+            The enumerator is positioned before the first element of the collection or after the last element.
+            </exception>
+        </member>
+        <member name="M:Medidata.Utilities.ExpiringHashtable`2.ExpiringHashtableEnumerator.MoveNext">
+            <summary>
+            Advances the enumerator to the next element of the collection.
+            </summary>
+            <returns>
+                <see langword="true"/> if the enumerator was successfully advanced to the next element;
+            <see langword="false"/> if the enumerator has passed the end of the collection.
+            </returns>
+            <exception cref="T:System.InvalidOperationException">The collection was modified after the enumerator was created.</exception>
+        </member>
+        <member name="M:Medidata.Utilities.ExpiringHashtable`2.ExpiringHashtableEnumerator.#ctor(Medidata.Utilities.ExpiringHashtable{`0,`1})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Medidata.Utilities.ExpiringHashtable`2.ExpiringHashtableEnumerator"/> class.
+            </summary>
+            <param name="hashtable">The hashtable.</param>
+        </member>
+        <member name="T:Medidata.Utilities.FileManager">
+            <summary>
+            File Manager object performs various operations based on specified file name
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.FileManager.#ctor(System.String,System.String)">
+            <summary>
+            File Manager Constructor
+            </summary>
+            <param name="typeCode">Type code of the directory to look at. (Pdf, Dcf, Sas)</param>
+            <param name="filename">Specified file name</param>
+        </member>
+        <member name="M:Medidata.Utilities.FileManager.GetFileExtension">
+            <summary>
+            Gets the extension of the specified file
+            </summary>
+            <returns>string of the file's extension</returns>
+        </member>
+        <member name="M:Medidata.Utilities.FileManager.GetDirectoryListing(System.String)">
+            <summary>
+            Gets list of files in directory
+            </summary>
+            <param name="typeCode"></param>
+            <returns>Returns the list in CSV</returns>
+        </member>
+        <member name="M:Medidata.Utilities.FileManager.RequestFile">
+            <summary>
+            Requests specified files
+            </summary>
+            <returns>Returns the data in array of bytes</returns>
+            <exception cref="T:System.IO.FileNotFoundException"></exception>
+        </member>
+        <member name="M:Medidata.Utilities.FileManager.GetModifiedDate">
+            <summary>
+            Gets the date that the specified file was modified
+            </summary>
+            <returns>The date and time the file was modified</returns>
+        </member>
+        <member name="M:Medidata.Utilities.FileManager.DoesFileExist">
+            <summary>
+            Determine whether the file exists
+            </summary>
+            <returns>True if file exists, false if not</returns>
+        </member>
+        <member name="M:Medidata.Utilities.FileManager.DeleteFile">
+            <summary>
+            Deletes the specified file
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.FileManager.UploadFile(System.IO.Stream)">
+            <summary>
+            Creates a file based on the inputStream
+            </summary>
+            <param name="inputStream"></param>
+        </member>
+        <member name="T:Medidata.Utilities.HexConverter">
+            <summary>
+            Represents how to convert strings to and from hex.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.HexConverter.#ctor">
+            <summary>
+            Prevent instanciation.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.HexConverter.ConvertToHex(System.String)">
+            <summary>
+            Converts a string to hexadecimal format.
+            </summary>
+            <param name="standardText">Standard text.</param>
+            <returns>String.</returns>
+        </member>
+        <member name="M:Medidata.Utilities.HexConverter.ConvertFromHex(System.String)">
+            <summary>
+            Converts a hexadecimal string to standard text.
+            </summary>
+            <param name="hex">Hexadecimal string.</param>
+            <returns>Standard text.</returns>
+        </member>
+        <member name="T:Medidata.Utilities.HtmlConstants">
+            <summary>
+            Html String Constants.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.NoTab">
+            <summary>
+            No Tab value for TabIndex.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.A">
+            <summary>
+            Anchor.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.AbsoluteBottom">
+            <summary>
+            Absolute Bottom.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.AbsoluteMiddle">
+            <summary>
+            Absolute Middle.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.AbsoluteTop">
+            <summary>
+            Absolute Top.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.Alt">
+            <summary>
+            Alt text attribute
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.Ampersand">
+            <summary>
+            Ampersand (&amp;)
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.AutoComplete">
+            <summary>
+            AutoComplete HTML attribute
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.BackgroundColor">
+            <summary>
+            Background Color.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.BackgroundImage">
+            <summary>
+            Background Image.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.Bold">
+            <summary>
+            Bold.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.Border">
+            <summary>
+            Border.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.Cellpadding">
+            <summary>
+            Cellpadding.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.Cellspacing">
+            <summary>
+            Cellspacing.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.Center">
+            <summary>
+            Center.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.CheckBox">
+            <summary>
+            Checkbox.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.Checked">
+            <summary>
+            Checked (for Checkbox).
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.Color">
+            <summary>
+            Color.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.ColumnSpan">
+            <summary>
+            ColumnSpan.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.CssClass">
+            <summary>
+            Css Class.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.Disabled">
+            <summary>
+            Disabled.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.Div">
+            <summary>
+            Div.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.DoPostBack">
+            <summary>
+            Force a manual Postback (format with UniqueID of Control).
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.EventTarget">
+            <summary>
+            Event Target.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.Font">
+            <summary>
+            Font.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.FontSize">
+            <summary>
+            Font Size.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.GreaterThan">
+            <summary>
+            Greater than. (&gt;)
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.Height">
+            <summary>
+            Height.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.Hidden">
+            <summary>
+            Hidden.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.HorizontalAlign">
+            <summary>
+            Horizontal Align.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.HorizontalLine">
+            <summary>
+            Horizontal Line.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.HorizontalSpace">
+            <summary>
+            Horizontal Space.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.Href">
+            <summary>
+            Hyper-reference.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.ID">
+            <summary>
+            ID.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.Iframe">
+            <summary>
+            IFrame.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.Image">
+            <summary>
+            Image.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.Input">
+            <summary>
+            Input.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.InputTypeButton">
+            <summary>
+            Button input type
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.InputTypeHidden">
+            <summary>
+            Hidden input type
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.InputTypeSubmit">
+            <summary>
+            Submit input type
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.InputTypeText">
+            <summary>
+            Text input type
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.Italic">
+            <summary>
+            Italic.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.JavaScript">
+            <summary>
+            JavaScript
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.Language">
+            <summary>
+            Language
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.Left">
+            <summary>
+            Left.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.LessThan">
+            <summary>
+            Less than. (&lt;)
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.LinkTarget">
+            <summary>
+            Link Target.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.Margin_Left">
+            <summary>
+            CSS Margin-left style
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.Middle">
+            <summary>
+            Middle.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.Name">
+            <summary>
+            Name.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.NewLine">
+            <summary>
+            New Line.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.NewParagraph">
+            <summary>
+            Paragraph.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.NeverBreak">
+            <summary>
+            No Line Break.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.NonBreakingSpace">
+            <summary>
+            Non Breaking Space.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.OnBlur">
+            <summary>
+            On blur event
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.OnChange">
+            <summary>
+            On change event
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.OnClick">
+            <summary>
+            On click event.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.OnDoubleClick">
+            <summary>
+            On double click event.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.OnFocus">
+            <summary>
+            On focus event
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.OnKeyDown">
+            <summary>
+            On keydown event
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.OnKeyPress">
+            <summary>
+            On KeyPress event
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.OnKeyUp">
+            <summary>
+            On key up event
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.OnMouseDown">
+            <summary>
+            On mouse down event
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.OnMouseOut">
+            <summary>
+            On mouse out event
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.OnMouseOver">
+            <summary>
+            On mouse over event
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.OnMouseUp">
+            <summary>
+            On mouse up event.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.OnSelectStart">
+            <summary>
+            On select start event
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.OnPropertyChange">
+            <summary>
+            On Property Change event
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.Quote">
+            <summary>
+            Quote. (&quot;)
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.ReadOnly">
+            <summary>
+            Readonly attribute for input elements
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.Right">
+            <summary>
+            Right.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.RowSpan">
+            <summary>
+            RowSpan.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.Script">
+            <summary>
+            Script
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.Size">
+            <summary>
+            Size.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.Source">
+            <summary>
+            Source.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.Span">
+            <summary>
+            Span.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.StrikeThrough">
+            <summary>
+            Strikethrough.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.Style">
+            <summary>
+            Style.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.TabIndex">
+            <summary>
+            Tab Index.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.Table">
+            <summary>
+            Table.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.TableCell">
+            <summary>
+            Table Cell.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.TableRow">
+            <summary>
+            Table Row.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.TargetFrame">
+            <summary>
+            Target Frame.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.ToolTip">
+            <summary>
+            Alternative Text.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.Top">
+            <summary>
+            Top.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.Type">
+            <summary>
+            Type (for Input etc...)
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.Underline">
+            <summary>
+            Underline.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.Value">
+            <summary>
+            Value.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.VerticalAlign">
+            <summary>
+            Vertical Align.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.VerticalSpace">
+            <summary>
+            Vertical Space.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.Width">
+            <summary>
+            Width.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.HtmlConstants.OnBeforeActivate">
+            <summary>
+            On Before Activate
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.HtmlConstants.#ctor">
+            <summary>
+            Private Constructor.
+            </summary>
+        </member>
+        <member name="T:Medidata.Utilities.Interfaces.IAuthenticator">
+            <summary>
+            Defines IAuthenticator interface.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.Interfaces.IAuthenticator.IsValidPassword(System.String,System.String,System.Boolean)">
+            <summary>
+            Validates Password
+            </summary>
+            <param name="UserName">User name / login</param>
+            <param name="Password">Password</param>
+            <param name="IsLogin">Indicates whether the user tries to login or not</param>
+            <returns>true or false</returns>
+        </member>
+        <member name="M:Medidata.Utilities.Interfaces.IAuthenticator.IsValidPin(System.String,System.String)">
+            <summary>
+            Validates PIN
+            </summary>
+            <param name="UserName">User name / login</param>
+            <param name="Pin">PIN</param>
+            <returns>true or false</returns>
+        </member>
+        <member name="M:Medidata.Utilities.Interfaces.IAuthenticator.Login(System.Int32@,System.String@,System.String@,System.String@,System.Int32@)">
+            <summary>
+            Checks user credentials
+            </summary>
+            <returns>login object</returns>
+        </member>
+        <member name="P:Medidata.Utilities.Interfaces.IAuthenticator.ID">
+            <summary>
+            Authenticator ID
+            </summary>
+        </member>
+        <member name="T:Medidata.Utilities.Interfaces.IFormCustomBindable">
+            <summary>
+            Interface for objects that wish to provide an implementation for custom form binding.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.Interfaces.IFormCustomBindable.PropertiesBindableByID">
+            <summary>
+            Describes a way to enable binding of complex objects by ID.
+            </summary>
+        </member>
+        <member name="T:Medidata.Utilities.Interfaces.IHttpRequestSender">
+            <summary>
+            Defines IFactory interface.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.Interfaces.IHttpRequestSender.Send(System.String,System.String,System.Int32,System.Int32,System.String,System.Int32,System.String,System.String[],System.String[],System.String,System.String)">
+            <summary>
+            Sends HTTP request
+            </summary>
+            <param name="RequestUrl">Request URL</param>
+            <param name="Method">Method</param>
+            <param name="ProtocolMajorVersion">Protocol major version number</param>
+            <param name="ProtocolMinorVersion">Protocol minor version number</param>
+            <param name="ContentType">Content type</param>
+            <param name="TimeoutInSeconds">Timeout in seconds</param>
+            <param name="UserAgent">User agent</param>
+            <param name="HeaderNames">Header names</param>
+            <param name="HeaderValues">Header values</param>
+            <param name="EncodingType">Encoding</param>
+            <param name="Request">Request string</param>
+            <returns>Http response as a string</returns>
+        </member>
+        <member name="T:Medidata.Utilities.Interfaces.IKeyValueDisplay">
+            <summary>
+            Interface of an IKeyValue that has a separate display value.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.Interfaces.IKeyValueDisplay.DisplayValue">
+            <summary>
+            The display value of the object.
+            </summary>
+        </member>
+        <member name="T:Medidata.Utilities.Interfaces.IKeyValueIsSpecify">
+            <summary>
+            IKeyValue interface with an extra boolean, typically used for telling whether an item has more information
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.Interfaces.IKeyValueIsSpecify.Specify">
+            <summary>
+            Get whether or not the IKeyValue item has more information (such as an other-specify input box)
+            </summary>
+        </member>
+        <member name="T:Medidata.Utilities.Interfaces.ISystemClock">
+            <summary>
+            Provides the current system time.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.Interfaces.ISystemClock.UtcNow">
+            <summary>
+            Gets the current system time in UTC.
+            </summary>
+        </member>
+        <member name="T:Medidata.Utilities.InternetConnection">
+            <summary>
+            Determine information about a local computer's connection to the internet.
+            </summary>
+        </member>
+        <member name="T:Medidata.Utilities.InternetConnection.NativeMethods">
+            <summary>
+            Native Methods.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.InternetConnection.NativeMethods.InternetGetConnectedState(System.Int32@,System.Int32)">
+            <summary>
+            Gets the connected state.
+            </summary>
+            <param name="lpdwFlags">A set of flags.</param>
+            <param name="dwReserved">A reserved value. (send 0 for now).</param>
+            <returns></returns>
+        </member>
+        <member name="M:Medidata.Utilities.InternetConnection.NativeMethods.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Medidata.Utilities.InternetConnection.NativeMethods"/> class.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.InternetConnection.IsConnected(Medidata.Utilities.ConnectionDetails@)">
+            <summary>
+            Determines whether the local computer is connected.
+            </summary>
+            <param name="details">The details.</param>
+            <returns>
+                <c>true</c> if the local computer is connected; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="T:Medidata.Utilities.ConnectionDetails">
+            <summary>
+            Connection Details.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.ConnectionDetails.Configured">
+            <summary>
+            INTERNET_CONNECTION_CONFIGURED. Local system has a valid connection to the Internet, but it might or might not be currently connected.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.ConnectionDetails.Lan">
+            <summary>
+            INTERNET_CONNECTION_LAN. Local system uses a local area network to connect to the Internet.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.ConnectionDetails.Modem">
+            <summary>
+            INTERNET_CONNECTION_MODEM. Local system uses a modem to connect to the Internet.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.ConnectionDetails.ModemBusy">
+            <summary>
+            INTERNET_CONNECTION_MODEM_BUSY. No longer used.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.ConnectionDetails.Offline">
+            <summary>
+            INTERNET_CONNECTION_OFFLINE. Local system is in offline mode.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.ConnectionDetails.Proxy">
+            <summary>
+            INTERNET_CONNECTION_PROXY. Local system uses a proxy server to connect to the Internet.
+            </summary>
+        </member>
+        <member name="T:Medidata.Utilities.KeyValue">
+            <summary>
+            Represents a simple object that implements the key value interface.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.KeyValue.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Medidata.Utilities.KeyValue"/> class.
+            Constructor for <c>KeyValue</c>, given a key and a value.
+            </summary>
+            <param name="key">A key string.</param>
+            <param name="value">A value string.</param>
+        </member>
+        <member name="M:Medidata.Utilities.KeyValue.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Medidata.Utilities.KeyValue"/> class.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.KeyValue.Key">
+            <summary>
+            Gets or sets the key for the <c>KeyValue</c>.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.KeyValue.Value">
+            <summary>
+            Get or set the value.
+            </summary>
+            <value><c>Value</c>; otherwise, <c>null</c>.</value>
+        </member>
+        <member name="M:Medidata.Utilities.KeyValue.CompareTo(Medidata.Utilities.KeyValue)">
+            <summary>
+            Compare one KeyValue to another.
+            </summary>
+            <param name="keyValue">A KeyValue object</param>
+            <returns>Comparison</returns>
+        </member>
+        <member name="M:Medidata.Utilities.KeyValue.op_Equality(Medidata.Utilities.KeyValue,Medidata.Utilities.KeyValue)">
+            <summary>
+            Is one KeyValue equal to another.
+            </summary>
+            <param name="k1">KeyValue</param>
+            <param name="k2">KeyValue</param>
+            <returns>Boolean</returns>
+        </member>
+        <member name="M:Medidata.Utilities.KeyValue.op_Inequality(Medidata.Utilities.KeyValue,Medidata.Utilities.KeyValue)">
+            <summary>
+            Is one KeyValue not equal to another.
+            </summary>
+            <param name="k1">KeyValue</param>
+            <param name="k2">KeyValue</param>
+            <returns>Boolean</returns>
+        </member>
+        <member name="M:Medidata.Utilities.KeyValue.op_GreaterThan(Medidata.Utilities.KeyValue,Medidata.Utilities.KeyValue)">
+            <summary>
+            Is one KeyValue greater than another.
+            </summary>
+            <param name="k1">KeyValue</param>
+            <param name="k2">KeyValue</param>
+            <returns>Boolean</returns>
+        </member>
+        <member name="M:Medidata.Utilities.KeyValue.op_GreaterThanOrEqual(Medidata.Utilities.KeyValue,Medidata.Utilities.KeyValue)">
+            <summary>
+            Is one KeyValue greater than or equal to another.
+            </summary>
+            <param name="k1">KeyValue</param>
+            <param name="k2">KeyValue</param>
+            <returns>Boolean</returns>
+        </member>
+        <member name="M:Medidata.Utilities.KeyValue.op_LessThan(Medidata.Utilities.KeyValue,Medidata.Utilities.KeyValue)">
+            <summary>
+            Is one KeyValue less than another.
+            </summary>
+            <param name="k1">KeyValue</param>
+            <param name="k2">KeyValue</param>
+            <returns>Boolean</returns>
+        </member>
+        <member name="M:Medidata.Utilities.KeyValue.op_LessThanOrEqual(Medidata.Utilities.KeyValue,Medidata.Utilities.KeyValue)">
+            <summary>
+            Is one KeyValue less than or equal to another.
+            </summary>
+            <param name="k1">KeyValue</param>
+            <param name="k2">KeyValue</param>
+            <returns>Boolean</returns>
+        </member>
+        <member name="M:Medidata.Utilities.KeyValue.Equals(System.Object)">
+            <summary>
+            Is one KeyValue equal to another object.
+            </summary>
+            <param name="obj">Object</param>
+            <returns>Boolean</returns>
+        </member>
+        <member name="M:Medidata.Utilities.KeyValue.GetHashCode">
+            <summary>
+            Get a hash code.
+            </summary>
+            <returns>Default hash code</returns>
+        </member>
+        <member name="M:Medidata.Utilities.KeyValue.ToString">
+            <summary>
+            Fetches the string value.
+            </summary>
+            <returns>The requested string value.</returns>
+        </member>
+        <member name="T:Medidata.Utilities.KeyValueCollection">
+            <summary>
+            Represents a simple object that implements the key value collection interface.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.KeyValueCollection.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Medidata.Utilities.KeyValueCollection"/> class.
+            Main constructor for <c>KeyValueCollection</c>.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.KeyValueCollection.Item(System.Int32)">
+            <summary>
+            Returns a <c>KeyValue</c> object at a specific index.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.KeyValueCollection.Item(System.String)">
+            <summary>
+            Returns a <c>KeyValue</c> object at a specific index.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.KeyValueCollection.TotalCount">
+            <summary>
+            Gets or sets the total count including those items which are not in this collection.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.KeyValueCollection.MoreResultsThanTotalCountExist">
+            <summary>
+            If there are more results in existence than the total count specifies, this is true.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.KeyValueCollection.GetByIndex(System.Int32)">
+            <summary>
+            Fetches a <c>KeyValue</c> by its index number.
+            </summary>
+            <param name="index">An index number.</param>
+            <returns>Returns the <c>KeyValue</c> object at the specified index number.</returns>
+        </member>
+        <member name="M:Medidata.Utilities.KeyValueCollection.Medidata#Utilities#Interfaces#IKeyValueCollection#GetByIndex(System.Int32)">
+            <summary>
+            Fetches a <c>KeyValue</c> by its index number.
+            </summary>
+            <param name="index">An index number.</param>
+            <returns>Returns the <c>KeyValue</c> object at the specified index number.</returns>
+        </member>
+        <member name="M:Medidata.Utilities.KeyValueCollection.GetByKey(System.String)">
+            <summary>
+            Fetches a <c>KeyValue</c> by its key.
+            </summary>
+            <param name="key">Key of the <c>KeyValue</c>.</param>
+            <returns>Return the <c>KeyValue</c> object that has a matching key.</returns>
+        </member>
+        <member name="M:Medidata.Utilities.KeyValueCollection.Medidata#Utilities#Interfaces#IKeyValueCollection#GetByKey(System.String)">
+            <summary>
+            Fetches a <c>KeyValue</c> by its key.
+            </summary>
+            <param name="key">Key of the <c>KeyValue</c>.</param>
+            <returns>Return the <c>KeyValue</c> object that has a matching key.</returns>
+        </member>
+        <member name="M:Medidata.Utilities.KeyValueCollection.IndexOf(Medidata.Utilities.KeyValue)">
+            <summary>
+            Get the index of an individual KeyValue.
+            </summary>
+            <param name="keyValue">Key Value</param>
+            <returns>Integer index</returns>
+        </member>
+        <member name="M:Medidata.Utilities.KeyValueCollection.Insert(System.Int32,Medidata.Utilities.KeyValue)">
+            <summary>
+            Inserts a <c>KeyValue</c> in the collection.
+            </summary>
+            <param name="index">Index.</param>
+            <param name="keyValue">Key value to insert.</param>
+        </member>
+        <member name="M:Medidata.Utilities.KeyValueCollection.Contains(Medidata.Utilities.KeyValue)">
+            <summary>
+            Gets whether the specified <c>KeyValue</c> is contained in this collection.
+            </summary>
+            <param name="keyValue">Key Value to find.</param>
+            <returns><c>true</c> if the specified Key value contained in this collection; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:Medidata.Utilities.KeyValueCollection.CopyTo(Medidata.Utilities.KeyValue[],System.Int32)">
+            <summary>
+            Copies a range of elements to an array.
+            </summary>
+            <param name="array">Destination array</param>
+            <param name="startIndex">Start index</param>
+        </member>
+        <member name="M:Medidata.Utilities.KeyValueCollection.FindByValue(System.String)">
+            <summary>
+            Fetches the <c>KeyValue</c> that matches by value.
+            </summary>
+            <param name="value">A string value.</param>
+            <returns><c>KeyValue</c> if it exists; otherwise <c>null</c>.</returns>
+        </member>
+        <member name="M:Medidata.Utilities.KeyValueCollection.Medidata#Utilities#Interfaces#IKeyValueCollection#FindByValue(System.String)">
+            <summary>
+            Finds the <c>KeyValue</c> that matches by value.
+            </summary>
+            <param name="value">A string value.</param>
+            <returns><c>KeyValue</c> if it exists; otherwise <c>null</c>.</returns>
+        </member>
+        <member name="M:Medidata.Utilities.KeyValueCollection.Add(Medidata.Utilities.KeyValue)">
+            <summary>
+            Fetches a <c>KeyValue</c> object to the collection.
+            </summary>
+            <param name="keyValue">A <c>KeyValue</c> object to add.</param>
+            <returns><c>KeyValue</c> that matches the specified parameter.</returns>
+        </member>
+        <member name="M:Medidata.Utilities.KeyValueCollection.Add(System.String,System.String)">
+            <summary>
+            Adds the <c>KeyValue</c> object to the <c>KeyValueCollection</c>.
+            </summary>
+            <param name="key">Key of the <c>KeyValue</c> object.</param>
+            <param name="value">Value of the <c>KeyValue</c> object.</param>
+            <returns><c>KeyValue</c> if it exists; otherwise <c>null</c>.</returns>
+        </member>
+        <member name="M:Medidata.Utilities.KeyValueCollection.Remove(Medidata.Utilities.KeyValue)">
+            <summary>
+            Removes a <c>KeyValue</c> object from the collection.
+            </summary>
+            <param name="keyValue">A KeyValue object to remove.</param>
+        </member>
+        <member name="M:Medidata.Utilities.KeyValueCollection.Join(Medidata.Utilities.KeyValueCollection)">
+            <summary>
+            Joins the passed collection to the object, ignoring duplicates.
+            </summary>
+            <param name="collection">Collection to add.</param>
+        </member>
+        <member name="M:Medidata.Utilities.KeyValueCollection.Sort">
+            <summary>
+            Sorts the <c>KeyValue</c> collection.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.KeyValueCollection.Sort(System.Collections.IComparer)">
+            <summary>
+            Sorts the specified comparer.
+            </summary>
+            <param name="comparer">The comparer.</param>
+        </member>
+        <member name="M:Medidata.Utilities.KeyValueCollection.OnRemove(System.Int32,System.Object)">
+            <summary>
+            When an item is removed, remove it from the hash table as well.
+            </summary>
+            <param name="index">The index of the KeyValue</param>
+            <param name="value">The object KeyValue</param>
+        </member>
+        <member name="M:Medidata.Utilities.KeyValueCollection.OnClear">
+            <summary>
+            When the collection is cleared, remove the items from the hash table as well.
+            </summary>
+        </member>
+        <member name="T:Medidata.Utilities.KeyValueDisplay">
+            <summary>
+            Represents a simple class that implements the key value display interface.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.KeyValueDisplay.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Medidata.Utilities.KeyValueDisplay"/> class.
+            Main Constructor.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.KeyValueDisplay.DisplayValue">
+            <summary>
+            Get or set the display value.
+            </summary>
+        </member>
+        <member name="T:Medidata.Utilities.LambdaComparer`1">
+            <summary>
+            Class allows LINQ operations on objects that don't override '=='
+            Taken from http://funwithcs.blogspot.com/2011/04/distinct-is-now-usable-lambdacomparer.html
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:Medidata.Utilities.LinkedHashtable">
+             <summary>
+             Hashtable that links keys to the values of other keys.
+             Hashtable that links keys to the same pointer to a value.
+             </summary>
+             <example>
+             LinkedHashtable linkedHashtable = new LinkedHashtable();
+             linkedHashtable["blah"] = new ArrayList();
+             linkedHashtable.AddLink("blah2", "blah");
+             linkedHashtable["blah"].Equals(linkedHashtable["blah2"]) //returns true;
+             linkedHashtable.Values.Count == 1 //returns true;
+            
+             LinkedHashtable linkedHashtable = new LinkedHashtable();
+             </example>
+        </member>
+        <member name="M:Medidata.Utilities.LinkedHashtable.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Medidata.Utilities.LinkedHashtable"/> class.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.LinkedHashtable.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Medidata.Utilities.LinkedHashtable"/> class.
+            </summary>
+            <param name="capacity">The capacity.</param>
+        </member>
+        <member name="M:Medidata.Utilities.LinkedHashtable.#ctor(System.Collections.IList)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Medidata.Utilities.LinkedHashtable"/> class.
+            </summary>
+            <param name="emptyValueList">The empty value list.</param>
+        </member>
+        <member name="M:Medidata.Utilities.LinkedHashtable.#ctor(System.Int32,System.Collections.IList)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Medidata.Utilities.LinkedHashtable"/> class.
+            </summary>
+            <param name="capacity">The capacity.</param>
+            <param name="emptyValueList">The empty value list.</param>
+        </member>
+        <member name="P:Medidata.Utilities.LinkedHashtable.Item(System.Object)">
+            <summary>
+            Get or set a value for a key.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.LinkedHashtable.Item(System.Object[])">
+            <summary>
+            Get or set a single value for multiple keys.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.LinkedHashtable.BypassSafetyChecks">
+            <summary>
+            Assume that API are executed in a safe manner (no keys reused for multiple objects without first removing the links).
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.LinkedHashtable.Count">
+            <summary>
+            Count the values.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.LinkedHashtable.Values">
+            <summary>
+            Return the values.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.LinkedHashtable.Add(System.Object,System.Object)">
+            <summary>
+            Set a single value to a single key.
+            </summary>
+            <param name="key">a key</param>
+            <param name="value">a value</param>
+        </member>
+        <member name="M:Medidata.Utilities.LinkedHashtable.AddLink(System.Object[])">
+            <summary>
+            Add a link between multiple keys to an existing value.
+            </summary>
+            <param name="keys">keys</param>
+        </member>
+        <member name="M:Medidata.Utilities.LinkedHashtable.AddLinkedValue(System.Object,System.Object[])">
+            <summary>
+            Add a value for multiple keys.
+            </summary>
+            <param name="value">a value</param>
+            <param name="keys">keys</param>
+        </member>
+        <member name="M:Medidata.Utilities.LinkedHashtable.Remove(System.Object)">
+            <summary>
+            Remove a key and all of its links.
+            </summary>
+            <param name="key">a key</param>
+        </member>
+        <member name="M:Medidata.Utilities.LinkedHashtable.RemoveLink(System.Object[])">
+            <summary>
+            Remove links for specified keys (that are linked together).
+            </summary>
+            <param name="keys">keys.</param>
+            <returns>True upon successful removal</returns>
+        </member>
+        <member name="M:Medidata.Utilities.LinkedHashtable.GetLinkedKeys(System.Object)">
+            <summary>
+            Get the keys that are linked to a specified key (including the passed-in key parameter).
+            </summary>
+            <param name="key">a key</param>
+            <returns>object[] keys that are linked to the specified key (includes the passed-in key parameter)</returns>
+        </member>
+        <member name="M:Medidata.Utilities.LinkedHashtable.ContainsValue(System.Object)">
+            <summary>
+            Determines if the hashtable contains a value.
+            </summary>
+            <param name="value">a value</param>
+            <returns>true if the value is in the hashtable.</returns>
+        </member>
+        <member name="M:Medidata.Utilities.LinkedHashtable.Clear">
+            <summary>
+            Clear the keys and values.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.LinkedHashtable.GetBaseValue(System.Object)">
+            <summary>
+            Accessor to System.Collections.Hashtable this[key].
+            </summary>
+            <param name="key">key</param>
+            <returns>value</returns>
+        </member>
+        <member name="M:Medidata.Utilities.LinkedHashtable.SetBaseValue(System.Object,System.Object)">
+            <summary>
+            Accessor to System.Collections.Hashtable this[key].
+            </summary>
+            <param name="key">key</param>
+            <param name="value">value</param>
+        </member>
+        <member name="M:Medidata.Utilities.LinkedHashtable.GetValue(System.Object[])">
+            <summary>
+            Get the value for a list of keys.
+            </summary>
+            <param name="keys">keys</param>
+            <returns>a value</returns>
+        </member>
+        <member name="M:Medidata.Utilities.LinkedHashtable.SetValue(System.Object,System.Object[])">
+            <summary>
+            Set the single value for a list of keys.
+            </summary>
+            <param name="value">a value</param>
+            <param name="keys">keys.</param>
+        </member>
+        <member name="M:Medidata.Utilities.LinkedHashtable.MapKeysToValue(System.Object[],System.Object,System.Boolean)">
+            <summary>
+            Link keys together to a value.
+            </summary>
+            <param name="keys">keys to link</param>
+            <param name="value">value to link to</param>
+            <param name="isValueChange">is a value being added or modified?</param>
+        </member>
+        <member name="M:Medidata.Utilities.LinkedHashtable.GetLinkForKeys(System.Object[])">
+            <summary>
+            Get the HashLink for a list of keys.
+            </summary>
+            <param name="keys">keys</param>
+            <returns>HashLink</returns>
+        </member>
+        <member name="M:Medidata.Utilities.LinkedHashtable.SetHashLinkValue(Medidata.Utilities.LinkedHashtable.HashLink,System.Object)">
+            <summary>
+            Set a HashLink's value.
+            </summary>
+            <param name="link">HashLink</param>
+            <param name="value">value</param>
+        </member>
+        <member name="M:Medidata.Utilities.LinkedHashtable.AddValue(System.Object)">
+            <summary>
+            Add a value to the Hashtable's Value collection.
+            </summary>
+            <param name="value">a value</param>
+        </member>
+        <member name="M:Medidata.Utilities.LinkedHashtable.RemoveValue(System.Object)">
+            <summary>
+            Remove a value from the Hashtable's Value collection.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:Medidata.Utilities.LinkedHashtable.IsLinkValid(System.Object[],System.Boolean)">
+            <summary>
+            Ensure all keys are in the same link to a value.
+            </summary>
+            <param name="keys">The keys.</param>
+            <param name="isExactMatchCheck">if true, the list of keys must be the same as the list of linked keys</param>
+            <returns>
+            True if valid, false if not.
+            </returns>
+        </member>
+        <member name="M:Medidata.Utilities.LinkedHashtable.IsLinkValid(System.Object[],System.Object[],System.Boolean)">
+            <summary>
+            Ensure all keys are in the same link to a value.
+            </summary>
+            <param name="keys">The keys.</param>
+            <param name="linkedKeys">The linked keys.</param>
+            <param name="isExactMatchCheck">if true, the list of keys must be the same as the list of linked keys</param>
+            <returns>
+            True if valid, false if not.
+            </returns>
+        </member>
+        <member name="M:Medidata.Utilities.LinkedHashtable.CreateNewValueList">
+            <summary>
+            Creates a new value list.
+            </summary>
+            <returns>IList</returns>
+        </member>
+        <member name="M:Medidata.Utilities.LinkedHashtable.HandleLinkConflict(Medidata.Utilities.LinkedHashtable.HashLink[])">
+            <summary>
+            Handle a link conflict (when keys are specified for use even though they are already in use by another link).
+            </summary>
+            <param name="links">HashLinks</param>
+        </member>
+        <member name="T:Medidata.Utilities.LinkedHashtable.HashLink">
+            <summary>
+            Represents a link of multiple keys to a single value.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.LinkedHashtable.HashLink.#ctor(System.Object,System.Object[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:Medidata.Utilities.LinkedHashtable.HashLink"/> class.
+            </summary>
+            <param name="value">a value</param>
+            <param name="keys">List of keys</param>
+        </member>
+        <member name="P:Medidata.Utilities.LinkedHashtable.HashLink.Keys">
+            <summary>
+            Gets the keys.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.LinkedHashtable.HashLink.Value">
+            <summary>
+            Gets the value.
+            </summary>
+        </member>
+        <member name="T:Medidata.Utilities.ManifestReader">
+            <summary>
+            Provides methods for reading out of the Manifest Resource.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.ManifestReader.#ctor">
+            <summary>
+            Private Constructor.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.ManifestReader.GetManifestResourceText(System.Reflection.Assembly,System.String)">
+            <summary>
+            Get the text contents of a Manifest Resource file.
+            </summary>
+            <param name="assembly">Assembly</param>
+            <param name="manifestResourceName">Manifest Resource Name</param>
+            <returns>String contents</returns>
+        </member>
+        <member name="M:Medidata.Utilities.ManifestReader.GetManifestResourceBytes(System.Reflection.Assembly,System.String)">
+            <summary>
+            Get the byte contents of a Manifest Resource file.
+            </summary>
+            <param name="assembly">Assembly</param>
+            <param name="manifestResourceName">Manifest Resource Name</param>
+            <returns>Byte array contents</returns>
+        </member>
+        <member name="M:Medidata.Utilities.ManifestReader.WriteManifestResourceContents(System.Reflection.Assembly,System.String,System.IO.Stream,System.Int32)">
+            <summary>
+            Write the contents of a Manifest Resource file to a stream.
+            </summary>
+            <param name="assembly">Assembly</param>
+            <param name="manifestResourceName">Manifest Resource Name</param>
+            <param name="outputStream">Output stream to write to</param>
+            <param name="bufferSize">Buffer size</param>
+        </member>
+        <member name="T:Medidata.Utilities.ManifestResourceData">
+            <summary>
+            Class that stores data relevant to retrieving library resources.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.ManifestResourceData.ManifestResourceName">
+            <summary>
+            Get the manifest resource name.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.ManifestResourceData.ResourceName">
+            <summary>
+            Get the file name from the manifest resource name.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.ManifestResourceData.ContentType">
+            <summary>
+            Get or set the content (MIME) type.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.ManifestResourceData.Assembly">
+            <summary>
+            Get the assembly.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.ManifestResourceData.#ctor(System.String,System.Reflection.Assembly)">
+            <summary>
+            Create a ManifestResourceData object.
+            </summary>
+            <param name="manifestResourceName">Manifest Resource Name</param>
+            <param name="assembly">Assembly</param>
+        </member>
+        <member name="M:Medidata.Utilities.ManifestResourceData.#ctor(System.String,System.Reflection.Assembly,System.String)">
+            <summary>
+            Create a ManifestResourceData object.
+            </summary>
+            <param name="manifestResourceName">Manifest Resource Name</param>
+            <param name="assembly">Assembly</param>
+            <param name="contentType">Content Type (MIME)</param>
+        </member>
+        <member name="T:Medidata.Utilities.MinimumVersionAttribute">
+            <summary>
+            Attribute to declare the minimum allowable version of a referenced assembly.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.MinimumVersionAttribute.s_AssemblyVersions">
+            <summary>
+            Discovers the assembly versions and requirements.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.MinimumVersionAttribute.DiscoverAssemblyVersions">
+            <summary>
+            Discovers the assembly versions.
+            </summary>
+            <returns>Dictionary</returns>
+        </member>
+        <member name="M:Medidata.Utilities.MinimumVersionAttribute.IsVersionAcceptable(System.String,System.String)">
+            <summary>
+            Determines whether the version is acceptable to the specified minimum version.
+            </summary>
+            <param name="minimumVersion">The minimum version.</param>
+            <param name="version">The version.</param>
+            <returns>
+                <c>true</c> if the version is acceptable to the specified minimum version; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Medidata.Utilities.MinimumVersionAttribute.DetermineAssemblyVersion(System.String)">
+            <summary>
+            Determines the assembly version.
+            </summary>
+            <param name="assemblyVersion">The assembly version string.</param>
+            <returns>Version object.</returns>
+        </member>
+        <member name="M:Medidata.Utilities.MinimumVersionAttribute.VerifyMinimumVersions">
+            <summary>
+            Verifies the minimum versions.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.MinimumVersionAttribute.GetAssemblyVersions">
+            <summary>
+            Gets the assembly versions as a NameValueCollection.
+            </summary>
+            <returns>NameValueCollection object.</returns>
+        </member>
+        <member name="M:Medidata.Utilities.MinimumVersionAttribute.GetRaveAssemblyVersions">
+            <summary>
+            Gets all the various assembly versions as a Dictionary of RaveAssemblyVersions
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="F:Medidata.Utilities.MinimumVersionAttribute.m_AssemblyName">
+            <summary>
+            The assembly name.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.MinimumVersionAttribute.m_MinimumVersion">
+            <summary>
+            The minimum acceptable assembly version.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.MinimumVersionAttribute.AssemblyFullName">
+            <summary>
+            The full name of the assembly.
+            </summary>
+            <value>The name of the assembly.</value>
+        </member>
+        <member name="P:Medidata.Utilities.MinimumVersionAttribute.MinimumVersion">
+            <summary>
+            The minimum acceptable assembly version.
+            </summary>
+            <value>The minimum version.</value>
+        </member>
+        <member name="M:Medidata.Utilities.MinimumVersionAttribute.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Medidata.Utilities.MinimumVersionAttribute"/> class.
+            </summary>
+            <param name="assemblyName">Name of the assembly.</param>
+            <param name="minimumVersion">The minimum acceptable assembly version.</param>
+        </member>
+        <member name="M:Medidata.Utilities.MinimumVersionAttribute.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="T:Medidata.Utilities.MinimumVersionAttributeCollection">
+            <summary>
+            Collection of <see cref="T:Medidata.Utilities.MinimumVersionAttribute"/> members.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.MinimumVersionAttributeCollection.Item(System.Int32)">
+            <summary>
+            Gets the <see cref="T:Medidata.Utilities.MinimumVersionAttribute"/> at the specified index.
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:Medidata.Utilities.MinimumVersionAttributeCollection.IndexOf(Medidata.Utilities.MinimumVersionAttribute)">
+            <summary>
+            Indexes the of.
+            </summary>
+            <param name="attribute">The attribute.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Medidata.Utilities.MinimumVersionAttributeCollection.Contains(Medidata.Utilities.MinimumVersionAttribute)">
+            <summary>
+            Determines whether [contains] [the specified attribute].
+            </summary>
+            <param name="attribute">The attribute.</param>
+            <returns>
+                <c>true</c> if [contains] [the specified attribute]; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Medidata.Utilities.MinimumVersionAttributeCollection.CopyTo(Medidata.Utilities.MinimumVersionAttribute[],System.Int32)">
+            <summary>
+            Copies to.
+            </summary>
+            <param name="array">The array.</param>
+            <param name="index">The index.</param>
+        </member>
+        <member name="M:Medidata.Utilities.MinimumVersionAttributeCollection.#ctor(System.Object[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:Medidata.Utilities.MinimumVersionAttributeCollection"/> class.
+            </summary>
+            <param name="attributes">The attributes.</param>
+        </member>
+        <member name="T:Medidata.Utilities.RaveAssemblyVersions">
+            <summary>
+            Holds various Rave assembly versions
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.RaveAssemblyVersions.AssemblyName">
+            <summary>
+            Assembly Name (e.g. Medidata.Utilities)
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.RaveAssemblyVersions.Version">
+            <summary>
+            Rave official version, such as Rave 2012.1.0
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.RaveAssemblyVersions.BuildId">
+            <summary>
+            Rave Build Id, such as 20121124033030-a7118b4
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.RaveAssemblyVersions.InternalVersion">
+            <summary>
+            Rave internal version such as 5.6.5.1 (former official version)
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.RaveAssemblyVersions.MinimumVersionCollection">
+            <summary>
+            A collection of minimum version custom assembly attributes
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.RaveAssemblyVersions.#ctor(System.String,System.String,System.String,System.String,Medidata.Utilities.MinimumVersionAttributeCollection)">
+            <summary>
+            Initialize RaveAssemblyVersions
+            </summary>
+            <param name="assemblyName">Assembly Name (e.g. Medidata.Utilities)</param>
+            <param name="version">Version, such as Rave 2012.1.0</param>
+            <param name="buildId">Build ID, such as 20121124033030-a7118b4</param>
+            <param name="internalVersion">Internal Version, such as 5.6.5.1</param>
+            <param name="minimumVersionCollection">A collection of minimim version custom assebly attributes</param>
+        </member>
+        <member name="M:Medidata.Utilities.RaveAssemblyVersions.#ctor">
+            <summary>
+            Public default constructor for XmlSerializer
+            </summary>
+        </member>
+        <member name="T:Medidata.Utilities.MultilinkedHashtable">
+            <summary>
+            A LinkedHashtable that allows a key to point to more than one value.
+            All hashtable queries return either null or an IList of values.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.MultilinkedHashtable.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Medidata.Utilities.MultilinkedHashtable"/> class.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.MultilinkedHashtable.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Medidata.Utilities.MultilinkedHashtable"/> class.
+            </summary>
+            <param name="capacity">The capacity.</param>
+        </member>
+        <member name="M:Medidata.Utilities.MultilinkedHashtable.#ctor(System.Collections.IList)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Medidata.Utilities.MultilinkedHashtable"/> class.
+            </summary>
+            <param name="emptyValueList">The empty value list.</param>
+        </member>
+        <member name="M:Medidata.Utilities.MultilinkedHashtable.#ctor(System.Int32,System.Collections.IList)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Medidata.Utilities.MultilinkedHashtable"/> class.
+            </summary>
+            <param name="capacity">The capacity.</param>
+            <param name="emptyValueList">The empty value list.</param>
+        </member>
+        <member name="M:Medidata.Utilities.MultilinkedHashtable.GetAllValues(System.Object[])">
+            <summary>
+            Get all values linked by the specified keys.
+            </summary>
+            <param name="keys">keys</param>
+            <returns>IList</returns>
+        </member>
+        <member name="M:Medidata.Utilities.MultilinkedHashtable.GetExactValuesForSpecificKeys(System.Object[])">
+            <summary>
+            Get the specific value linked by the specified keys.
+            </summary>
+            <param name="keys">keys</param>
+            <returns>IList</returns>
+        </member>
+        <member name="M:Medidata.Utilities.MultilinkedHashtable.Remove(System.Object)">
+            <summary>
+            Remove a key and all of its links.
+            </summary>
+            <param name="key">key</param>
+        </member>
+        <member name="M:Medidata.Utilities.MultilinkedHashtable.RemoveLink(System.Object[])">
+            <summary>
+            Remove links for specified keys (that are linked together).
+            </summary>
+            <param name="keys">keys</param>
+            <returns>True upon successful removal</returns>
+        </member>
+        <member name="M:Medidata.Utilities.MultilinkedHashtable.RemoveKeysFromHashLink(System.Object[],System.Boolean)">
+            <summary>
+            Remove links for specified keys.
+            </summary>
+            <param name="keys">keys</param>
+            <param name="allLinks">Perform the operation for all HashLink objects, or perform it for a single HashLink object.</param>
+            <returns>True upon successful removal</returns>
+        </member>
+        <member name="M:Medidata.Utilities.MultilinkedHashtable.RemoveKeysFromHashLink(Medidata.Utilities.LinkedHashtable.HashLink,System.Object[])">
+            <summary>
+            Remove links for specified keys on a specific HashLink.
+            </summary>
+            <param name="link">HashLink</param>
+            <param name="keys">keys to remove.</param>
+            <returns>True upon successful removal</returns>
+        </member>
+        <member name="M:Medidata.Utilities.MultilinkedHashtable.GetValuesForKeys(System.Object[],System.Boolean)">
+            <summary>
+            Gets the values for keys.
+            </summary>
+            <param name="keys">The keys.</param>
+            <param name="isExactMatchCheck">If true, get the specific HashLink object that exactly matches all keys</param>
+        </member>
+        <member name="M:Medidata.Utilities.MultilinkedHashtable.GetValuesForKeys(System.Object[],System.Boolean,System.Boolean)">
+            <summary>
+            Gets the values for keys.
+            </summary>
+            <param name="keys">The keys.</param>
+            <param name="isExactMatchCheck">If true, get the specific HashLink object that exactly matches all keys</param>
+            <param name="getLinks">Put the HashLink objects in the resulting collection instead of the link's values</param>
+        </member>
+        <member name="M:Medidata.Utilities.MultilinkedHashtable.GetValue(System.Object[])">
+            <summary>
+            Get the single value that matches all keys.
+            </summary>
+            <param name="keys">keys</param>
+            <returns>value</returns>
+        </member>
+        <member name="M:Medidata.Utilities.MultilinkedHashtable.MapKeysToValue(System.Object[],System.Object,System.Boolean)">
+            <summary>
+            Link keys together to a value.
+            </summary>
+            <param name="keys">keys to link</param>
+            <param name="value">value to link to</param>
+            <param name="isValueChange">is a value being added or modified?</param>
+        </member>
+        <member name="M:Medidata.Utilities.MultilinkedHashtable.GetLinkForKeys(System.Object[])">
+            <summary>
+            Get the HashLink for a list of keys.
+            </summary>
+            <param name="keys">keys</param>
+            <returns>HashLink</returns>
+        </member>
+        <member name="T:Medidata.Utilities.ObjectIdentifier">
+            <summary>
+            A grouping of the properties necessary to uniquely identify an object.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.ObjectIdentifier.#ctor(System.Object)">
+            <summary>
+            Create an ObjectIdentifier custom attribute.
+            </summary>
+            <param name="key">The key that identifies the unique ObjectIdentifier</param>
+        </member>
+        <member name="P:Medidata.Utilities.ObjectIdentifier.Key">
+            <summary>
+            Get the name that identifies the unique ObjectIdentifier.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.ObjectIdentifier.PropertyInfos">
+            <summary>
+            Get the ArrayList containing PropertyInfo objects that represent the necessay data to identify an object.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.ObjectIdentifier.GetObjectIdentifer(System.Type,System.Object)">
+            <summary>
+            Get an ObjectIdentifier by Type and key.
+            </summary>
+            <param name="identifierGroupKey">identifier key.</param>
+            <param name="type">Type</param>
+        </member>
+        <member name="M:Medidata.Utilities.ObjectIdentifier.FindObjectIdentifierByKey(System.Object,System.Collections.ArrayList)">
+            <summary>
+            Find an ObjectIdentifier object by key.
+            </summary>
+            <param name="key">key</param>
+            <param name="identifiers">ArrayList of ObjectIdentifier objects</param>
+            <returns>ObjectIdentifier or null</returns>
+        </member>
+        <member name="T:Medidata.Utilities.ObjectIdentifierAttribute">
+            <summary>
+            Used for tagging properties that can be used to uniquely identify an object.
+            ObjectIdentiferAttribute objects with the same key uniquely define an identifier.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.ObjectIdentifierAttribute.#ctor(System.Object)">
+            <summary>
+            Create an ObjectIdentifierAttribute.
+            </summary>
+            <param name="key">key</param>
+        </member>
+        <member name="P:Medidata.Utilities.ObjectIdentifierAttribute.Key">
+            <summary>
+            Get the name that will define a unique ObjectIdentifier.
+            </summary>
+        </member>
+        <member name="T:Medidata.Utilities.PerformanceStatistics">
+            <summary>
+            Performance Statistics.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.PerformanceStatistics.GetCpuPerformanceCounter">
+            <summary>
+            Gets the CPU performance counter.
+            </summary>
+            <returns>Counter.</returns>
+        </member>
+        <member name="M:Medidata.Utilities.PerformanceStatistics.Calculate">
+            <summary>
+            Calculates performance statistics.
+            </summary>
+            <returns>Performance statistics.</returns>
+        </member>
+        <member name="P:Medidata.Utilities.PerformanceStatistics.TimeStamp">
+            <summary>
+            Gets the time stamp.
+            </summary>
+            <value>The time stamp.</value>
+        </member>
+        <member name="P:Medidata.Utilities.PerformanceStatistics.CpuPercentage">
+            <summary>
+            Gets or sets the cpu percentage.
+            </summary>
+            <value>The cpu percentage.</value>
+        </member>
+        <member name="P:Medidata.Utilities.PerformanceStatistics.TotalMemory">
+            <summary>
+            Gets the total memory.
+            </summary>
+            <value>The total memory.</value>
+        </member>
+        <member name="P:Medidata.Utilities.PerformanceStatistics.WorkingSet">
+            <summary>
+            Gets the working set.
+            </summary>
+            <value>The working set.</value>
+        </member>
+        <member name="P:Medidata.Utilities.PerformanceStatistics.VirtualMemorySize">
+            <summary>
+            Gets the size of the virtual memory.
+            </summary>
+            <value>The size of the virtual memory.</value>
+        </member>
+        <member name="P:Medidata.Utilities.PerformanceStatistics.AvailableWorkerThreads">
+            <summary>
+            Gets the available worker threads.
+            </summary>
+            <value>The available worker threads.</value>
+        </member>
+        <member name="P:Medidata.Utilities.PerformanceStatistics.AvailableCompletionPortThreads">
+            <summary>
+            Gets the available completion port threads.
+            </summary>
+            <value>The available completion port threads.</value>
+        </member>
+        <member name="M:Medidata.Utilities.PerformanceStatistics.#ctor">
+            <summary>
+            DO NOT USE THIS CONSTRUCTOR - IT IS FOR THE XML SERIALIZER ONLY.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.PerformanceStatistics.#ctor(System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Medidata.Utilities.PerformanceStatistics"/> class.
+            </summary>
+            <param name="initialize">if set to <c>true</c> initialize this instance.</param>
+        </member>
+        <member name="T:Medidata.Utilities.SectionRandom">
+             <summary>
+             A section is something that contains a integer as weight.
+             This class will randomly generate the section's index base on the weight it carries.
+            
+             Example:
+             Section 1 weights 100
+             Section 2 weights 10
+            
+             The NextSection() method will return the index 0 (Section 1)  or 1 (Section 2)
+             But the odds to return 0 is 10x heigher than 1
+             </summary>
+        </member>
+        <member name="M:Medidata.Utilities.SectionRandom.#ctor(System.Int32[])">
+            <summary>
+            See class description
+            </summary>
+            <param name="sectionWeights"></param>
+        </member>
+        <member name="M:Medidata.Utilities.SectionRandom.NextSection">
+            <summary>
+            See class description
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Medidata.Utilities.SpecialCharsHelper">
+            <summary>
+            Class that has methods to replace special characters
+            to help improving the security in different application
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.SpecialCharsHelper.ReplaceOSCommandSeparators(System.String)">
+            <summary>
+            Replaces OS command separator characters to prevent command injection
+            </summary>
+            <param name="text">potentially vulnerable string</param>
+            <returns>string without any command separators</returns>
+        </member>
+        <member name="M:Medidata.Utilities.SpecialCharsHelper.ReplaceHeaderSeparators(System.String)">
+            <summary>
+            Replaces known http header separator chars to prevent response splitting
+            </summary>
+            <param name="text">string that is being used as a header text</param>
+            <returns>string without header separators</returns>
+        </member>
+        <member name="M:Medidata.Utilities.SpecialCharsHelper.ReplaceNewLine(System.String)">
+            <summary>
+            replaces carriage return and line feed chars in a string
+            used by other functions as part of different helper functions
+            </summary>
+            <param name="text">string that may contain carriage return and line feed chars</param>
+            <returns>string without carriagge return and line feed chars</returns>
+        </member>
+        <member name="M:Medidata.Utilities.SpecialCharsHelper.ReplaceCRLF(System.String)">
+            <summary>
+            replaces carriage return and line feed chars in a string with line feed \n char
+            </summary>
+            <param name="inputString">string that may contain carriage return and line feed chars</param>
+            <returns>string with line feed chars</returns>
+        </member>
+        <member name="T:Medidata.Utilities.StreamHelper">
+            <summary>
+            Stream Associated Methods.
+            This class can not be inherited.
+            </summary>
+        </member>
+        <member name="T:Medidata.Utilities.StreamHelper.Constants">
+            <summary>
+            Constants.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.StreamHelper.Constants.FourKilobytes">
+            <summary>
+            Four Kilobytes.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.StreamHelper.Constants.BasicMultiple">
+            <summary>
+            Buffer sizes must be an even multiple of the value of this constant.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.StreamHelper.Constants.#ctor">
+            <summary>
+            Prevent Instanciation.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.StreamHelper.#ctor">
+            <summary>
+            Private Constructor.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.StreamHelper.TransferStream(System.IO.Stream,System.IO.Stream)">
+            <summary>
+            Transfer data from one stream to another.  (Use a four kilobyte buffer size).
+            </summary>
+            <param name="sourceStream">Source Stream</param>
+            <param name="targetStream">Target Stream</param>
+        </member>
+        <member name="M:Medidata.Utilities.StreamHelper.TransferStream(System.IO.Stream,System.IO.Stream,System.Int32)">
+            <summary>
+            Transfer data from one stream to another.
+            </summary>
+            <param name="sourceStream">Source Stream</param>
+            <param name="targetStream">Target Stream</param>
+            <param name="bufferSize">Buffer Size</param>
+        </member>
+        <member name="T:Medidata.Utilities.StreamingSettings">
+            <summary>
+            Streaming Settings.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.StreamingSettings.GetConfiguredValues(System.String)">
+            <summary>
+            Gets the configured values.
+            </summary>
+            <param name="sectionName">Name of the section.</param>
+            <returns>Streaming Settings.</returns>
+        </member>
+        <member name="P:Medidata.Utilities.StreamingSettings.ConfiguredValues">
+            <summary>
+            Gets the configured values.
+            </summary>
+            <value>The configured values.</value>
+        </member>
+        <member name="P:Medidata.Utilities.StreamingSettings.ImpersonationSettings">
+            <summary>
+            Impersonation Settings.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.StreamingSettings.RootDirectories">
+            <summary>
+            Root Directories.
+            </summary>
+        </member>
+        <member name="T:Medidata.Utilities.RootDirectories">
+            <summary>
+            Root Directories based on file types.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.RootDirectories.Sas">
+            <summary>
+            Sas.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.RootDirectories.Pdf">
+            <summary>
+            Pdf.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.RootDirectories.Dcf">
+            <summary>
+            Dcf.
+            </summary>
+        </member>
+        <member name="T:Medidata.Utilities.ThreadedListener">
+            <summary>
+            Threaded Listener defines the base class for threaded listeners.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.ThreadedListener.IsStarted">
+            <summary>
+            Gets a value indicating whether this instance is started.
+            </summary>
+            <value>
+                <c>true</c> if this instance is started; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:Medidata.Utilities.ThreadedListener.System#IDisposable#Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or
+            resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.ThreadedListener.Stop">
+            <summary>
+            Stops this instance.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.ThreadedListener.Start">
+            <summary>
+            Starts this instance.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.ThreadedListener.HandleStart(System.Object)">
+            <summary>
+            Handles the start.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.ThreadedListener.PerformOperation">
+            <summary>
+            Performs the operation.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.ThreadedListener.#ctor(System.TimeSpan)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Medidata.Utilities.ThreadedListener"/> class.
+            </summary>
+            <param name="sleepTime">The sleep time.</param>
+        </member>
+        <member name="T:Medidata.Utilities.ThreadHashTable">
+            <summary>
+            ThreadHashTable.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.ThreadHashTable.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Medidata.Utilities.ThreadHashTable"/> class.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.ThreadHashTable.ThreadCount">
+            <summary>
+            Gets the thread count.
+            </summary>
+            <value>The thread count.</value>
+        </member>
+        <member name="M:Medidata.Utilities.ThreadHashTable.AddThread(System.Object,System.Object)">
+            <summary>
+            Adds the thread.
+            </summary>
+            <param name="threadId">The thread id.</param>
+            <param name="threadValue">The thread value.</param>
+        </member>
+        <member name="M:Medidata.Utilities.ThreadHashTable.RemoveThread(System.Object)">
+            <summary>
+            Removes the thread.
+            </summary>
+            <param name="threadId">The thread id.</param>
+        </member>
+        <member name="M:Medidata.Utilities.ThreadHashTable.Clear">
+            <summary>
+            Clears this instance.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.ThreadHashTable.ContainsKey(System.Object)">
+            <summary>
+            Determines whether the hash table contains the specified thread id.
+            </summary>
+            <param name="threadId">The thread id.</param>
+            <returns>
+                <c>true</c> if [contains] [the specified thread id]; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Medidata.Utilities.ThreadHashTable.ContainsValue(System.Object)">
+            <summary>
+            Determines whether the specified thread value contains value.
+            </summary>
+            <param name="threadValue">The thread value.</param>
+            <returns>
+                <c>true</c> if the specified thread value contains value; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="P:Medidata.Utilities.ThreadHashTable.ThreadIdCollection">
+            <summary>
+            Gets the thread id collection.
+            </summary>
+            <value>The thread id collection.</value>
+        </member>
+        <member name="P:Medidata.Utilities.ThreadHashTable.ThreadValueCollection">
+            <summary>
+            Gets the thread value collection.
+            </summary>
+            <value>The thread value collection.</value>
+        </member>
+        <member name="P:Medidata.Utilities.ThreadHashTable.Item(System.Object)">
+            <summary>
+            Gets or sets the <see cref="T:System.Object"/> with the specified thread id.
+            </summary>
+            <value></value>
+        </member>
+        <member name="T:Medidata.Utilities.UniversalDateTimeFormat">
+            <summary>
+            Provides means of conversion between strings and datetimes based on the unlocalizable, unconfigurable date time format:
+            YYYY MM DD HH:MM:SS
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.UniversalDateTimeFormat.GetDate(System.String)">
+            <summary>
+            Gets the date. The string should be in YYYY MM DD format.
+            </summary>
+            <param name="date">The date.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Medidata.Utilities.UniversalDateTimeFormat.GetDateString(System.DateTime)">
+            <summary>
+            Gets the date string. Returns string in YYYY MM DD format.
+            </summary>
+            <param name="date">The date.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Medidata.Utilities.UserImpersonation">
+            <summary>
+            User Impersonation.
+            </summary>
+        </member>
+        <member name="T:Medidata.Utilities.UserImpersonation.Constants">
+            <summary>
+            Constants.
+            </summary>
+        </member>
+        <member name="T:Medidata.Utilities.UserImpersonation.Constants.LogonParameters">
+            <summary>
+            Logon Parameters.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.UserImpersonation.Constants.LogonParameters.Win32ProviderDefault">
+            <summary>
+            Default Win 32 Provider.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.UserImpersonation.Constants.LogonParameters.Win32LogonInteractive">
+            <summary>
+            Interactive Logon.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.UserImpersonation.Constants.LogonParameters.SecurityImpersonation">
+            <summary>
+            Security Impersonation.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.UserImpersonation.Constants.LogonParameters.#ctor">
+            <summary>
+            Private Constructor.
+            </summary>
+        </member>
+        <member name="T:Medidata.Utilities.UserImpersonation.NativeMethods">
+            <summary>
+            API's are wrapped in this struct.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.UserImpersonation.NativeMethods.LogonUser(System.String,System.String,System.String,System.Int32,System.Int32,System.IntPtr@)">
+            <summary>
+            Log a user on to a windows domain.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.UserImpersonation.NativeMethods.DuplicateToken(System.IntPtr,System.Int32,System.IntPtr@)">
+            <summary>
+            Duplicate a token.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.UserImpersonation.NativeMethods.#ctor">
+            <summary>
+            Private Constructor.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.UserImpersonation.ImpersonateUser(Medidata.Utilities.ImpersonationSettings)">
+            <summary>
+            Impersonate logging on as a specific user on a domain.
+            </summary>
+            <param name="settings">Impersonation Settings</param>
+            <returns>User Impersonation Token</returns>
+        </member>
+        <member name="M:Medidata.Utilities.UserImpersonation.ImpersonateUser(System.String,System.String,System.String)">
+            <summary>
+            Impersonate logging on as a specific user on a domain.
+            </summary>
+            <param name="userName">User name</param>
+            <param name="password">Password</param>
+            <param name="domainName">Domain name</param>
+            <returns>User Impersonation Token</returns>
+        </member>
+        <member name="M:Medidata.Utilities.UserImpersonation.#ctor">
+            <summary>
+            Private Constructor.
+            </summary>
+        </member>
+        <member name="T:Medidata.Utilities.ImpersonationSettings">
+            <summary>
+            Impersonation Settings
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.ImpersonationSettings.UserName">
+            <summary>
+            User Name.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.ImpersonationSettings.Password">
+            <summary>
+            Password.
+            </summary>
+        </member>
+        <member name="P:Medidata.Utilities.ImpersonationSettings.Domain">
+            <summary>
+            Domain.
+            </summary>
+        </member>
+        <member name="T:Medidata.Utilities.UserImpersonationToken">
+            <summary>
+            User Impersonation Token.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.UserImpersonationToken.#ctor(System.Security.Principal.WindowsImpersonationContext,System.IntPtr,System.IntPtr)">
+            <summary>
+            Create a User Impersonation Token.
+            </summary>
+            <param name="context">Windows Impersonation Context</param>
+            <param name="tokenHandle">Token Handle</param>
+            <param name="duplicateTokenHandle">Duplicate Token Handle</param>
+        </member>
+        <member name="M:Medidata.Utilities.UserImpersonationToken.Dispose">
+            <summary>
+            Dispose of the User Impersonation Token.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.UserImpersonationToken.Dispose(System.Boolean)">
+            <summary>
+            Dispose.
+            </summary>
+            <param name="suppressFinalize">Option to suppress finalization</param>
+        </member>
+        <member name="M:Medidata.Utilities.UserImpersonationToken.Finalize">
+            <summary>
+            Finalizer.
+            </summary>
+        </member>
+        <member name="T:Medidata.Utilities.UserImpersonationToken.NativeMethods">
+            <summary>
+            API's are wrapped in this struct.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.UserImpersonationToken.NativeMethods.CloseHandle(System.IntPtr)">
+            <summary>
+            Close a handle.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.UserImpersonationToken.NativeMethods.#ctor">
+            <summary>
+            Private Constructor.
+            </summary>
+        </member>
+        <member name="T:Medidata.Utilities.Win32ExceptionClarifier">
+            <summary>
+            Win32 Exception Clarifier.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.Win32ExceptionClarifier.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Medidata.Utilities.Win32ExceptionClarifier"/> class.
+            </summary>
+        </member>
+        <member name="T:Medidata.Utilities.Win32ExceptionClarifier.FormatMessageFlags">
+            <summary>
+            Format message flags.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.Win32ExceptionClarifier.FormatMessageFlags.AllocateBuffer">
+            <summary>
+            Allocate Buffer.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.Win32ExceptionClarifier.FormatMessageFlags.IgnoreInserts">
+            <summary>
+            Ignore Inserts.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.Win32ExceptionClarifier.FormatMessageFlags.FromSystem">
+            <summary>
+            From System.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.Win32ExceptionClarifier.FormatMessageFlags.#ctor">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="T:Medidata.Utilities.Win32ExceptionClarifier.NativeMethods">
+            <summary>
+            API's are wrapped in this struct.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.Win32ExceptionClarifier.NativeMethods.FormatMessage(System.Int32,System.IntPtr@,System.Int32,System.Int32,System.String@,System.Int32,System.IntPtr*)">
+            <summary>
+            Format a message to interpret a Win32 error code.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.Win32ExceptionClarifier.NativeMethods.#ctor">
+            <summary>
+            Private Constructor.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.Win32ExceptionClarifier.CreateWin32Exception(System.Int32)">
+            <summary>
+            Creates a Win32Exception based on the error code passed in.
+            </summary>
+            <param name="errorCode">Error code.</param>
+            <returns>Win32 Exception</returns>
+        </member>
+        <member name="M:Medidata.Utilities.Win32ExceptionClarifier.GetWin32ErrorText(System.Int32,System.String@)">
+            <summary>
+            Gets the Win32 error text.
+            </summary>
+            <param name="errorCode">The error code.</param>
+            <param name="errorMessage">The error message.</param>
+            <returns>Win 32 Error Text.</returns>
+        </member>
+        <member name="T:Medidata.Utilities.XmlNodeSectionHandler">
+            <summary>
+            Simple Section Handler simply returns an XmlNode.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.XmlNodeSectionHandler.System#Configuration#IConfigurationSectionHandler#Create(System.Object,System.Object,System.Xml.XmlNode)">
+            <summary>
+            Create an object based on an XmlNode, but in this case simply return the XmlNode.
+            </summary>
+            <param name="parent">Parent</param>
+            <param name="configContext">Configuration Context</param>
+            <param name="section">Section to Return</param>
+            <returns>Section</returns>
+        </member>
+        <member name="T:Medidata.Utilities.XmlSectionHandler">
+            <summary>
+            Generic Section Handler allows for an Xml Section from app/web.config to be deserialized into any object.
+            </summary>
+        </member>
+        <member name="T:Medidata.Utilities.XmlSectionHandler.StringConstants">
+            <summary>
+            Constants used in XmlSectionHandler.
+            </summary>
+        </member>
+        <member name="F:Medidata.Utilities.XmlSectionHandler.StringConstants.Type">
+            <summary>
+            Type to be deserialized to.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.XmlSectionHandler.GetTypeAttribute(System.Xml.XmlAttributeCollection)">
+            <summary>
+            Get the type attribute in a collection of attributes.
+            </summary>
+            <param name="attributes">Attribute collection</param>
+            <returns>XmlAttribute</returns>
+        </member>
+        <member name="T:Medidata.Utilities.ZipOutputStreamHelper">
+            <summary>
+            ZipOutputStream Methods.
+            This class can not be inherited.
+            </summary>
+        </member>
+        <member name="M:Medidata.Utilities.ZipOutputStreamHelper.#ctor(System.IO.Stream)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="baseOutputStream"></param>        
+        </member>
+        <member name="M:Medidata.Utilities.ZipOutputStreamHelper.#ctor(System.IO.Stream,System.Int32)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="baseOutputStream"></param>
+            <param name="bufferSize"></param>
+        </member>
+        <member name="M:Medidata.Utilities.ZipOutputStreamHelper.#ctor(System.IO.Stream,ICSharpCode.SharpZipLib.Zip.UseZip64)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="baseOutputStream"></param>
+            <param name="useZip64"></param>
+        </member>
+        <member name="M:Medidata.Utilities.ZipOutputStreamHelper.#ctor(System.IO.Stream,System.Int32,ICSharpCode.SharpZipLib.Zip.UseZip64)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="baseOutputStream"></param>
+            <param name="bufferSize"></param>
+            <param name="useZip64"></param>
+        </member>
+    </members>
+</doc>
