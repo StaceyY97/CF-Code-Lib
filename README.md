@@ -69,6 +69,86 @@ The source `.cs` files were encoded with `CR CR LF` line endings (a text-mode ro
 fragment with a single `CRLF` per logical line. No code was changed — only whitespace between
 lines. Files are UTF-8 (with BOM where the source had one).
 
+## New API Templates (Lib_newAPI)
+
+The `Lib_newAPI/` folder contains templates that use **interface-based programming** instead of
+concrete classes, following modern Rave development best practices.
+
+### Key features:
+
+1. **Interface types** instead of concrete classes:
+   - `ISubject` instead of `Subject`
+   - `IDataPoint` instead of `DataPoint`
+   - `IReadOnlyList<IDataPoint>` instead of `DataPoints`
+   - `IActionFunctionParams` instead of `ActionFunctionParams`
+   - `IInstance`, `IDataPage`, `IRecord`, `IMatrix` for their respective concrete types
+
+2. **Rave static context**:
+   - `Rave.Context.ActionDataPoint` to get the action DataPoint
+   - `Rave.Marking.PerformQueryAction()` for query operations
+   - `Rave.Architect.FetchMatrixByOid()` for matrix operations
+
+3. **Interface-based data retrieval**:
+   - `subject.GetDataPointsByOidPath(fieldOID, formOID, folderOID)` for log/non-log data
+   - `subject.Instances.FindByFolderOid(folderOID)` for instance lookup
+   - `instance.DataPages.FindByFormOid(formOID)` for data page lookup
+   - `record.AllDataPoints.FindByFieldOid(fieldOID)` for data point lookup
+
+4. **Property access**:
+   - `dp.StandardValue` (property) instead of `dp.StandardValue()` (method)
+   - `dp.IsVisibleRaw` for visibility check
+   - `dp.Record.RecordPosition` for log form position
+
+### Basic Helper Methods
+
+`Lib_newAPI/Basical_Func.cs` provides reusable helper methods:
+
+```csharp
+// Get non-log DataPoint
+IDataPoint GetDP(string field_Oid, string form_Oid, string folder_Oid, ISubject subj) 
+    => subj.Instances.FindByFolderOid(folder_Oid)?.DataPages.FindByFormOid(form_Oid)?.MasterRecord.AllDataPoints.FindByFieldOid(field_Oid);
+
+// Get log DataPoints (can also apply to non-log)
+IReadOnlyList<IDataPoint> dps = subject.GetDataPointsByOidPath(oid_field, oid_form, folder_oid);
+
+// Validation helpers
+bool DoCheck(IDataPoint dp, bool IsDate, bool checkEmpty = true) 
+    => IsDate ? IsValidDp(dp, checkEmpty) && IsValidDate(dp) : IsValidDp(dp, checkEmpty);
+bool IsValidDp(IDataPoint dp, bool checkEmpty) 
+    => dp != null && dp.Active && dp.IsVisibleRaw && (checkEmpty ? dp.Data != string.Empty : true);
+bool IsValidDate(IDataPoint dp) 
+    => dp != null && dp.Active && dp.IsVisibleRaw && (dp.StandardValue is DateTime || dp.StandardValue is TimeSpan);
+```
+
+## CF Builder Workflow
+
+`CF_Builder.cs` is the **working file** for generating and testing new custom functions.
+
+### Usage:
+1. Describe the CF requirement to the AI assistant
+2. AI generates CF code directly into `CF_Builder.cs` (replacing any existing CF)
+3. Review and test the generated code
+4. Move validated CF to the appropriate category folder
+
+### Code Generation Rules:
+- **Delete and replace**: New CF replaces all existing CFs in `CF_Builder.cs`
+- **Interface-based**: Use `ISubject`, `IDataPoint`, etc. instead of concrete classes
+- **Header in Eval**: CF description goes inside `Eval()` as `HEADER INFORMATION` comment block
+- **No XML docs on helpers**: Helper methods use inline comments, not `/// <summary>`
+- **Helper placement**: Simple helpers inside `Eval()`, multiple helpers after `Eval()` before class close
+
+## Rave CF Generator Skill
+
+The `rave-cf-generator/` folder contains the AI skill for generating custom functions.
+
+### Key files:
+- `SKILL.md` - Skill definition and code generation rules
+- `references/categories.md` - Category map and matching hints
+- `references/customization-guide.md` - Standard framework and adaptation rules
+- `scripts/match_template.py` - Template matching utility
+- `scripts/instantiate.py` - Template instantiation utility
+- `scripts/validate_cf.py` - CF validation utility
+
 ## Changes applied, in order
 
 1. **Classified** all custom functions into the 9 categories above (500 files).
@@ -108,6 +188,9 @@ There are **67 clusters** and **67 kept representatives** among the 280 files.
 | Path | Content |
 | --- | --- |
 | `_class_name_map.csv` | CF name -> C# class name, flag for sanitised names |
+| `CF_Builder.cs` | Working file for CF generation and testing |
+| `Lib_newAPI/` | Interface-based templates and helper methods |
+| `rave-cf-generator/` | AI skill for generating custom functions |
 | `../_backup_CFCodeLib_pre_template/` | full snapshot taken immediately before step 6 (458 files) |
 | `../_backup_CFCodeLib_fragments/` | pre-wrap fragments (same 9-folder layout) |
 | `../_removed_from_lib/` | all archived removals + the three manifests |
