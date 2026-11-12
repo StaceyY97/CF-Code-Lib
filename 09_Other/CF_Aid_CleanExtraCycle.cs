@@ -66,8 +66,6 @@ object[] inputParameters = (object[])ThisObject;
     Subject curSub = (Subject)inputParameters[0];
     System.Collections.Generic.Dictionary<string, int[]> checkCycles = (System.Collections.Generic.Dictionary<string, int[]>)inputParameters[1];
     Commen = (string[])inputParameters[2];
-                        if (curSub.Name == "C501-QY01") Message.SendEmail("qian.yang@edetek.com", "test_qy_2@mdsol.com", "test_qy", $"test_enter");
-
     System.Collections.Generic.List<string> manageFolders = new System.Collections.Generic.List<string> { };
 
     foreach (string key in checkCycles.Keys)

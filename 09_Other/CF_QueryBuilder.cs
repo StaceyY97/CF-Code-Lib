@@ -67,7 +67,6 @@ object[] inputParameters = (object[])ThisObject;
  Dictionary<int, string> relation = (Dictionary<int, string>)inputParameters[1];
  string querytext = (string)inputParameters[2];
  DataPoint enterDP= (DataPoint)inputParameters[3];
-//if (enterDP.Record.Subject.Name == "QY005" && enterDP.Field.OID == "STOOL_P1") Message.SendEmail("qian.yang@edetek.com", "test_qy@mdsol.com", "test_qy", "enter CF");
 
  Dictionary<string, string> FUNC_TYPE = new Dictionary<string, string>
  {
@@ -106,7 +105,6 @@ object[] inputParameters = (object[])ThisObject;
 
  Dictionary<string, List<string>> queryParameters = new Dictionary<string, List<string>>();
  if (triggerDPs == null) return querytext;
- //if (enterDP.Record.Subject.Name == "QY005" && enterDP.Field.OID == "STOOL_P1") Message.SendEmail("qian.yang@edetek.com", "test_qy@mdsol.com", "test_qy", "enter CF_2");
 
 
  foreach (var kvp in triggerDPs)
@@ -130,7 +128,6 @@ object[] inputParameters = (object[])ThisObject;
          }
      }
  }
- //if (enterDP.Record.Subject.Name == "QY005" && enterDP.Field.OID == "STOOL_P1") Message.SendEmail("qian.yang@edetek.com", "test_qy@mdsol.com", "test_qy", "enter CF_3");
 
  foreach (string key in queryParameters.Keys)
  {

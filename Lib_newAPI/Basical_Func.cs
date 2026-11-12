@@ -9,4 +9,4 @@ bool DoCheck(IDataPoint dp, bool IsDate, bool checkEmpty = true) => IsDate ? IsV
 bool IsValidDp(IDataPoint dp, bool checkEmpty) => dp != null && dp.Active && dp.IsVisibleRaw && (checkEmpty ? dp.Data != string.Empty : true);
 bool IsValidDate(IDataPoint dp) => dp != null && dp.Active && dp.IsVisibleRaw && (dp.StandardValue is DateTime || dp.StandardValue is TimeSpan);
 
-IReadOnlyList<IDataPoint> dps_query = dpAction.Field.OID == "EXPERM" ? new List<IDataPoint>() { dpAction } : SUBJ.GetDataPointsByOidPath("EXPERM", "EX", "EX");
+IReadOnlyList<IDataPoint> dps_query = dpAction.Field.OID == "" ? new List<IDataPoint>() { dpAction } : SUBJ.GetDataPointsByOidPath("", "", "");

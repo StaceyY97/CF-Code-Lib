@@ -45,6 +45,8 @@ validate it, and return complete usable code.
    - Use `Rave.Context.ActionDataPoint` to get the action DataPoint
    - Use `Rave.Marking.PerformQueryAction()` instead of `CustomFunction.PerformQueryAction()`
    - Use `Rave.Architect.FetchMatrixByOid()` for matrix operations
+   - Use `Rave.Message.SendMail(to, from, subject, body)` to send emails
+     - **DO NOT** use `System.Net.Mail.MailMessage` / `SmtpClient` or the legacy `Message.SendEmail()`
 
 6. **Use interface-based data retrieval**:
    - Use `subject.GetDataPointsByOidPath(fieldOID, formOID, folderOID)` instead of `CustomFunction.FetchAllDataPointsForOIDPath()`
@@ -52,7 +54,35 @@ validate it, and return complete usable code.
    - Use `instance.DataPages.FindByFormOid(formOID)` for data page lookup
    - Use `record.AllDataPoints.FindByFieldOid(fieldOID)` for data point lookup within a record
 
-7. **DataPoint property access on interfaces**:
+7. **Query field retrieval pattern**:
+   - When fetching query field data points, use this pattern:
+     ```csharp
+     IReadOnlyList<IDataPoint> dps_query = dpAction.Field.OID == "<fieldOID_query>" 
+         ? new List<IDataPoint>() { dpAction } 
+         : subject.GetDataPointsByOidPath("<fieldOID_query>", "<formOID_query>", "<folderOID_query>");
+     ```
+   - This pattern checks if the action field is the query field:
+     - If YES: only process that single data point (avoid re-fetching)
+     - If NO: fetch all data points for the query field (for cross-field triggers)
+   - This is the standard pattern for log form query fields and works for both log and non-log forms
+
+8. **DataPoint validity checks**:
+   - **Query field** (the datapoint passed to `Rave.Marking.PerformQueryAction`): only require it to be **non-null**
+     (`if (dp_query == null) continue;`). Do NOT skip it for being inactive/empty/invisible, so that
+     `PerformQueryAction(..., false, ...)` can still close an existing query when the condition clears.
+   - **All other fields** (compare / trigger / source fields): validate with the Basical_Func.cs helpers
+     before using their values:
+     - Non-date fields: `IsValidDp(dp, checkEmpty)` (or `DoCheck(dp, false)`)
+     - Date/time fields: `DoCheck(dp, true)` (= `IsValidDp` + `IsValidDate`)
+     - Copy the helper lambdas from `Lib_newAPI/Basical_Func.cs` into the CF (after Eval) when used.
+   - If it is unclear whether a compare field is a Date/Time field, **ask the user** before generating
+     the code instead of guessing.
+
+9. **Exception handling**:
+   - When a `try { } catch { }` is used, write a bare `catch { }` (no exception variable, no comment, no logging, no rethrow).
+   - Do NOT flag the silent catch as an issue/risk in the delivery summary or review.
+
+10. **DataPoint property access on interfaces**:
    - Use `dp.StandardValue` (property) instead of `dp.StandardValue()` (method)
    - Use `dp.IsVisibleRaw` for visibility check
    - Use `dp.Record.RecordPosition` for log form position

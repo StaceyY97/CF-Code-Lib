@@ -62,70 +62,67 @@ namespace CustomFunctions
     }
     #endregion
 
-    public class ValueComp_CMAETERM_AETERM : CustomFunctionBase
+    public class DSL_CMAETERM : CustomFunctionBase
     {
         public object Eval(object ThisObject)
         {
             /**************************HEADER INFORMATION******************************
             * Programmer Name: [Your Name]
-            * Description: Check if CMAETERM matches any AETERM value.
-            *              Opens query when CMAETERM does not match any AETERM.
+            * Description: Dynamic Search List for CMAETERM (form CM, subject-wide).
+            *              Options are built from AE log lines (subject-wide) in the
+            *              format <RecordPosition>-<AETERM>-<AESTDAT>.
+            *              AETERM is validated with DoCheck(dp, false) (non-null,
+            *              active, visible, non-empty); invalid lines and the master
+            *              record are skipped. AETERM is truncated to 60 characters.
+            *              AESTDAT is validated with DoCheck(dp, true) (valid + full
+            *              date); an invalid date keeps the line with an empty date
+            *              part (pos-term-).
             **************************************************************************/
 
-            IActionFunctionParams afp = (IActionFunctionParams)ThisObject;
-            IDataPoint dpAction = Rave.Context.ActionDataPoint;
+            //Variable Declaration Start -------
+            string oid_folder_target = null;
+            string oid_form_target = "AE";
+            string oid_term = "AETERM", oid_dat = "AESTDAT";
+            //Variable Declaration End -------
 
-            if (dpAction == null) return null;
-            ISubject subject = dpAction.Record.Subject;
-            if (subject == null) return null;
-
-            string fieldOID_compare = "AETERM";
-            string formOID_compare = "AE";
-            string fieldOID_query = "CMAETERM";
-            string formOID_query = "CM";
-
-            string queryMessage = "Term's not match with any of the AETERM, please confirm";
-            const bool closeOnChange = true;
-            const bool answerOnChange = true;
-            const int markingGroup = 1;
-
-            // Fetch all AETERM values from AE log form (subject-wide scope)
-            IReadOnlyList<IDataPoint> dpsAETERM = subject.GetDataPointsByOidPath(fieldOID_compare, formOID_compare, null);
-
-            // Fetch all CMAETERM values from CM log form (subject-wide scope)
-            IReadOnlyList<IDataPoint> dpsCMAETERM = subject.GetDataPointsByOidPath(fieldOID_query, formOID_query, null);
-
-            // If action field is CMAETERM, only check that one; otherwise check all
-            IReadOnlyList<IDataPoint> dpsToCheck = dpAction.Field.OID == fieldOID_query 
-                ? new List<IDataPoint>() { dpAction } 
-                : dpsCMAETERM;
-
-            foreach (IDataPoint dpQuery in dpsToCheck)
+            KeyValueCollection KVC = new KeyValueCollection();
+            try
             {
-                if (dpQuery == null || !dpQuery.Active) continue;
+                IDynamicSearchParams DSP = (IDynamicSearchParams)ThisObject;
+                if (DSP == null || DSP.DataPoint == null) return KVC;
 
-                bool openQuery = false;
+                ISubject subject = DSP.DataPoint.Record.Subject;
+                if (subject == null) return KVC;
 
-                if (dpQuery.Data != string.Empty)
+                IReadOnlyList<IDataPoint> dps_terms = subject.GetDataPointsByOidPath(oid_term, oid_form_target, oid_folder_target);
+                if (dps_terms != null && dps_terms.Count > 0)
                 {
-                    // Check if this CMAETERM value matches any AETERM value
-                    bool foundMatch = false;
-                    foreach (IDataPoint dpCompare in dpsAETERM)
+                    for (int i = 0; i < dps_terms.Count; i++)
                     {
-                        if (dpCompare == null || !dpCompare.Active) continue;
-                        if (dpCompare.Data != string.Empty && string.Equals(dpCompare.Data.Trim(), dpQuery.Data.Trim(), StringComparison.OrdinalIgnoreCase))
-                        {
-                            foundMatch = true;
-                            break;
-                        }
+                        IDataPoint dp_term = dps_terms[i];
+
+                        // Skip invalid term (null/inactive/hidden/empty) and master record
+                        if (!DoCheck(dp_term, false) || dp_term.Record.RecordPosition == 0) continue;
+
+                        IDataPoint dp_dat = dp_term.Record.AllDataPoints.FindByFieldOid(oid_dat);
+
+                        string str_rcPos = dp_term.Record.RecordPosition.ToString();
+                        // Truncate long terms to 60 characters
+                        string str_term = dp_term.Data.Trim().Length >= 60 ? dp_term.Data.Trim().Substring(0, 60) : dp_term.Data.Trim();
+                        // Invalid or partial start date -> empty date part
+                        string str_dat = DoCheck(dp_dat, true) ? dp_dat.UserValue.ToString().Trim() : "";
+
+                        string ds = $"{str_rcPos}-{str_term}-{str_dat}";
+                        KVC.Add(new KeyValue(ds, ds));
                     }
-                    if (!foundMatch) openQuery = true;
                 }
-
-                Rave.Marking.PerformQueryAction(dpQuery, queryMessage, markingGroup, answerOnChange, closeOnChange, openQuery, afp.CheckRef, afp.CheckHash);
             }
-
-            return null;
+            catch {}
+            return KVC;
         }
+
+        bool DoCheck(IDataPoint dp, bool IsDate, bool checkEmpty = true) => IsDate ? IsValidDp(dp, checkEmpty) && IsValidDate(dp) : IsValidDp(dp, checkEmpty);
+        bool IsValidDp(IDataPoint dp, bool checkEmpty) => dp != null && dp.Active && dp.IsVisibleRaw && (checkEmpty ? dp.Data != string.Empty : true);
+        bool IsValidDate(IDataPoint dp) => dp != null && dp.Active && dp.IsVisibleRaw && (dp.StandardValue is DateTime || dp.StandardValue is TimeSpan);
     }
 }
