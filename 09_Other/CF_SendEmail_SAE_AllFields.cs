@@ -69,7 +69,7 @@ ActionFunctionParams afp = (ActionFunctionParams)ThisObject;
         return null;
     }
 
-    const string from = "SAE_Alert@mdsol.com";
+    const string from = "";
     Subject subj;
     string siteNumber, subjName, country, environment, studyName;
     string[] FieldOrder = new string[] { };

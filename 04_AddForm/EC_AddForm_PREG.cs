@@ -68,7 +68,6 @@ ActionFunctionParams afp = (ActionFunctionParams)ThisObject;
 
     string match = "F";
     bool doAdd;
-//Message.SendEmail("qian.yang@edetek.com", "test_qy@mdsol.com", "test_qy", "ec entered: " +currentFolder.Folder.Name );
     DataPoint tempDP_SCR = (DataPoint)CustomFunction.PerformCustomFunction("CF_GetDataPoint", dpAction.Field.CRFVersion.ID, new object[] { dpAction.Record.Subject, "", "SCREEN_1", "DM", "DMSEX" });
     DataPoint tempDP_RSCR = (DataPoint)CustomFunction.PerformCustomFunction("CF_GetDataPoint", dpAction.Field.CRFVersion.ID, new object[] { dpAction.Record.Subject, "", "RESCREEN_1", "DM", "DMSEX" });
 

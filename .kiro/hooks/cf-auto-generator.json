@@ -1,0 +1,15 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Auto CF Generator",
+      "trigger": "UserPromptSubmit",
+      "description": "当用户提交 CF 编写请求时，自动触发专门的 CF 编写 agent",
+      "matcher": "(?i)(cf|custom.*function|开质疑|设可见|合并矩阵|加表单|填值|动态检索)",
+      "action": {
+        "type": "agent",
+        "prompt": "你是一个专门的 Medidata Rave 自定义函数编写 agent。用户请求编写 CF，请立即使用 rave-cf-generator 技能来处理此请求。首先读取技能文件，然后按照工作流程：\n1. 使用脚本匹配模板\n2. 收集用户参数\n3. 生成代码\n4. 写入 CF_Builder.cs\n严格遵循所有接口、Rave 上下文、查询字段模式等规则。"
+      }
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "verdict": "CHANGES_REQUESTED",
+  "findings": [
+    "DSCONT save behavior changed (confirmed): a DSCONT save now calls CF_Aid_AddnextCycle for every cycle folder (up to 50 calls instead of 1, each of which can add, re-activate or inactivate forms) and runs CF_Aid_CleanExtraCycle. Before, it touched only the saved folder and did no clean. A DSCONT save in a non-matching folder (e.g. C3D1 for cohort 1, C4D15 for 1B) used to do nothing and now runs the full scan plus the clean. Either record the user's approval where the review can verify it, or restructure so the cycle comes from the current folder.",
+    "Approval not in the authoritative record (confirmed): coder-notes.md and equivalence.md say the orchestrator relayed the user's reply 'A' (Option A). No such reply is in the user-message record, and this step's brief still says to preserve behavior and treat any behavior change as blocking. Have the orchestrator confirm and record the approval, or update the brief to accept the change. All other checks pass: no field-OID branch, no cycinfo initializers, all 17 literals set all six properties with the old default values, framework untouched, and every per-cohort row of the equivalence trace matches the code."
+  ],
+  "reviewDoc": "d:\\AI\\Workbudy\\06_Project Code\\CF Code Lib\\.agents\\tasks\\cf-builder-addcycle-refactor\\review.md"
+}

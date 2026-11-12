@@ -88,7 +88,6 @@ public object Eval(object ThisObject)
 
             int idx = Folder_seq.IndexOf(dp_visnx.Record.Instance?.Name.Trim());
             if (idx >= 0 && dp_visnx.Data == str_doAdd_trigger) last_visyn = Math.Max(last_visyn, idx);
-            if (curSub.Name == "C501-QY02") Rave.Messaging.SendEmail("qian.yang@edetek.com", "test_qy_2@mdsol.com", "test_qy", $"Check_1_{dp_visnx.Record.Instance?.Name}_{dp_visnx.Data}_{idx >= 0}_{dp_visnx.Data == str_doAdd_trigger}");
         }
         if (last_visyn < Folder_seq.Count - 1)
         {

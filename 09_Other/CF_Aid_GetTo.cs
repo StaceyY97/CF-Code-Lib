@@ -77,16 +77,16 @@ public object Eval(object ThisObject)
         switch (environment)
         {
             case "DEV":
-            to = "qian.yang@edetek.com;qi.liao@edetek.com";
+            to = "";
             break;
             case "UAT":
-            to ="qian.yang@edetek.com;qi.liao@edetek.com;neelima.gundala@edetek.com;seema.ravilla@edetek.com;kwright@olema.com";
+            to = "";
             break;
             case "PROD":
-            to = "RTPSafety@ppd.com;drugsafety@olema.com;OP-3136-101_Olema-EDC-alerts@olema.com;qi.liao@edetek.com;neelima.gundala@edetek.com;seema.ravilla@edetek.com;OP-3136-101_Novotech-EDC-alerts@novotech-cro.com";
+            to = "";
             break;
             default:
-            to = "qian.yang@edetek.com";
+            to = "";
             break;
         }
 
